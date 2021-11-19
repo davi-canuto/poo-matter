@@ -1,2 +1,6 @@
 language = "csharp"
+<<<<<<< HEAD
 run = "mcs -out:main.exe 'class-07/params.cs' ; mono main.exe"
+=======
+run = "msc -out:main.exe 'class-03/uri_1001.cs' ; mono main.exe" 
+>>>>>>> origin/main
