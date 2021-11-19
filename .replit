@@ -1,0 +1,2 @@
+language = "csharp"
+run = "mcs -out:main.exe 'class-07/params.cs' ; mono main.exe"
