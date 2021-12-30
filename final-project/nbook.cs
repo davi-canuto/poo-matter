@@ -17,7 +17,7 @@ class NBook{
     Array.Copy(books, c, nc);
     return c;
   }
-  
+
   public Book List(int id) {
     for (int i = 0 ; i < nc; i++)
       if (books[i].GetId() == id) return books[i];
@@ -31,7 +31,7 @@ class NBook{
       books[i] = books[i + 1];
     nc--;
   }
-  
+
   private int Indice(Book c){
     for (int i = 0; i < nc; i++)
       if(books[i] == c) return i;

@@ -1,3 +1,4 @@
+
 using System;
 
 class NBag { 
@@ -17,7 +18,7 @@ class NBag {
     Array.Copy(bags, c, nc);
     return c;
   }
-  
+
   public Bag List(int id) {
     for (int i = 0 ; i < nc; i++)
       if (bags[i].GetId() == id) return bags[i];
@@ -37,10 +38,10 @@ class NBag {
       bags[i] = bags[i + 1];
     nc--;
   }
-  
+
   private int Indice(Bag c){
     for (int i = 0; i < nc; i++)
       if(bags[i] == c) return i;
     return -1;
   }
-}
+} 

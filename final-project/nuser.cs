@@ -1,3 +1,4 @@
+
 using System;
 
 class NUser{
@@ -17,7 +18,7 @@ class NUser{
     Array.Copy(users, c, nc);
     return c;
   }
-  
+
   public User List(int id) {
     for (int i = 0 ; i < nc; i++)
       if (users[i].GetId() == id) return users[i];
@@ -37,10 +38,10 @@ class NUser{
       users[i] = users[i + 1];
     nc--;
   }
-  
+
   private int Indice(User c){
     for (int i = 0; i < nc; i++)
       if(users[i] == c) return i;
     return -1;
   }
-}
+} 
