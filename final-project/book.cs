@@ -4,15 +4,15 @@ class Book {
   private int id;
   private string title;
   private string gender;
-  private Bag bag;
+  private Cart cart;
   private Loan loan;
   public Book(int id, string title, string gender){
     this.id = id;
     this.title = title;
     this.gender = gender;
   }
-  public Book(int id, string title, string gender, Bag bag) : this(id,title,gender){
-    this.bag = bag;
+  public Book(int id, string title, string gender, Cart cart) : this(id,title,gender){
+    this.cart = cart;
   }
   public void SetId(int id){
     this.id = id;
@@ -23,8 +23,8 @@ class Book {
   public void SetGender(string gender){
     this.gender = gender;
   }
-  public void SetBag(Bag bag){
-    this.bag = bag;
+  public void SetBag(Cart cart){
+    this.cart = cart;
   }
   public void SetLoan(Loan loan){
     this.loan = loan;
@@ -38,17 +38,17 @@ class Book {
   public string GetGender(){
     return gender;
   }
-  public Bag GetBag(){
-    return bag;
+  public Cart GetBag(){
+    return cart;
   }
   public Loan GetLoan(){
     return loan;
   }
 
   public override string ToString(){
-    if (bag == null)
+    if (cart == null)
       return id + " - " + title + " - Gender: " + gender;  
     else
-      return id + " - " + title + " - Gender: " + gender + ", Bag capacity: " + bag.GetCapacity();
+      return id + " - " + title + " - Gender: " + gender + ", Cart id: " + cart.GetId();
   }
 }

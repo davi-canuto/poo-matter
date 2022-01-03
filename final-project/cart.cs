@@ -1,14 +1,14 @@
 using System;
 
-class Bag{
+class Cart{
   private int id;
   private int capacity;
   private User user;
-  public Bag(int id, int capacity){
+  public Cart(int id, int capacity){
     this.id = id;
     this.capacity = capacity;
   }
-  public Bag(int id, int capacity, User user) : this(id,capacity){
+  public Cart(int id, int capacity, User user) : this(id,capacity){
     this.user = user;
   }
   public void SetId(int id){

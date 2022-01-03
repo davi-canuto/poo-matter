@@ -3,13 +3,13 @@ using System;
 class MainClass{
   private static NBook nbook = new NBook();
   private static NUser nuser = new NUser();
-  private static NBag nbag = new NBag();
+  private static NCart ncart = new NCart();
   private static NLoan nloan = new NLoan();
   public static void Main(){
     int op = 0;
     int o = 0;
     int p = 0 ;
-    Console.WriteLine ("----- BOOK ORGANIZATION APP ------");
+    Console.WriteLine ("------------------------------ LIBRARY APP------------------------------ ");
     do {
       try {
         o = MenuUser();
@@ -26,12 +26,12 @@ class MainClass{
     } while (o != 0);
     do {
       try {
-        p = MenuBag();
+        p = MenuCart();
         switch(p){
-          case 1 : BagList(); break;
-          case 2 : BagInsert(); break;
-          case 3 : BagRemove();break;
-          case 4 : BagUpdate();break;
+          case 1 : CartList(); break;
+          case 2 : CartInsert(); break;
+          case 3 : CartRemove();break;
+          case 4 : CartUpdate();break;
         }
       } catch(Exception erro) {
         Console.WriteLine(erro.Message);
@@ -63,20 +63,20 @@ class MainClass{
     Console.WriteLine("2 - Insert user");
     Console.WriteLine("3 - Remove user"); 
     Console.WriteLine("4 - Update user"); 
-    Console.WriteLine("0 - Go for register Bag");
+    Console.WriteLine("0 - Go for register Cart");
     Console.Write("Enter: ");
     int op = int.Parse(Console.ReadLine());
     Console.WriteLine();
     return op;
   }
 
-  public static int MenuBag(){
+  public static int MenuCart(){
     Console.WriteLine();
-    Console.WriteLine("--------- REGISTER BAG -----------");
-    Console.WriteLine("1 - List bags");
-    Console.WriteLine("2 - Insert bag");
-    Console.WriteLine("3 - Remove bag"); 
-    Console.WriteLine("4 - Update bag"); 
+    Console.WriteLine("--------- REGISTER Cart -----------");
+    Console.WriteLine("1 - List carts");
+    Console.WriteLine("2 - Insert cart");
+    Console.WriteLine("3 - Remove cart"); 
+    Console.WriteLine("4 - Update cart"); 
     Console.WriteLine("0 - Go for organization books.");
     Console.Write("Enter: ");
     int op = int.Parse(Console.ReadLine());
@@ -88,9 +88,9 @@ class MainClass{
     Console.WriteLine();
     Console.WriteLine("------------- ORGANIZATION BOOKS -------------");
     Console.WriteLine();
-    Console.WriteLine("1 - List the books that are in the bag.");
-    Console.WriteLine("2 - Insert book in your bag.");
-    Console.WriteLine("3 - Remove book the bag.");
+    Console.WriteLine("1 - List the books that are in the cart.");
+    Console.WriteLine("2 - Insert book in your cart.");
+    Console.WriteLine("3 - Remove book the cart.");
     Console.WriteLine("4 - Loan the book.");
     Console.WriteLine("0 - EXIT!!!!.");
     Console.Write("Enter: ");
@@ -116,7 +116,7 @@ class MainClass{
 
 /*   ------------------ BOOK CODE ------------------- */
   public static void BookList(){
-    Console.WriteLine("------- BOOKS IN THE BAG ---------");
+    Console.WriteLine("------- BOOKS IN THE Cart ---------");
     Book[] cs = nbook.List();
     if (cs.Length == 0){
       Console.WriteLine("No books!");
@@ -134,10 +134,10 @@ class MainClass{
     string title = Console.ReadLine();
     Console.Write("Enter the gender: ");
     string gender = Console.ReadLine();
-    BagList();
-    Console.Write("Inform the bag code:");
+    CartList();
+    Console.Write("Inform the Cart code:");
     int idbook = int.Parse(Console.ReadLine());
-    Bag b = nbag.List(idbook);
+    Cart b = ncart.List(idbook);
     Book i = new Book(id,title,gender,b);
     nbook.Insert(i);
   }
@@ -245,51 +245,51 @@ class MainClass{
 
   }
 
-/*   ------------------ BAG CODE ------------------- */
+/*   ------------------ Cart CODE ------------------- */
 
-  public static void BagList(){
-    Console.WriteLine("------- BAG LIST ---------");
-    Bag[] us = nbag.List();
+  public static void CartList(){
+    Console.WriteLine("------- Cart LIST ---------");
+    Cart[] us = ncart.List();
     if (us.Length == 0){
-      Console.WriteLine("No bags!");
+      Console.WriteLine("No carts!");
       return;
     } 
-    foreach(Bag u in us) Console.WriteLine(u);
+    foreach(Cart u in us) Console.WriteLine(u);
     Console.WriteLine();
   }
 
 
-  public static void BagInsert(){
-    Console.WriteLine("-------- REGISTER BAG --------------");
-    Console.Write("Enter an id for the bag: ");
+  public static void CartInsert(){
+    Console.WriteLine("-------- REGISTER CART --------------");
+    Console.Write("Enter an id for the cart: ");
     int id = int.Parse(Console.ReadLine());
-    Console.Write("Enter the bag books capacity: ");
+    Console.Write("Enter the cart books capacity: ");
     int capacity = int.Parse(Console.ReadLine());
     UserList();
-    Console.Write("Inform the bag user code: ");
+    Console.Write("Inform the cart user code: ");
     int iduser = int.Parse(Console.ReadLine());
     User u = nuser.List(iduser);
-    Bag b = new Bag(id, capacity,u);
-    nbag.Insert(b);
+    Cart b = new Cart(id, capacity,u);
+    ncart.Insert(b);
   }
 
-  public static void BagUpdate(){
-    Console.WriteLine("------BAG UPTATE-------");
-    BagList();
-    Console.Write("Enter an id for the bag update: ");
+  public static void CartUpdate(){
+    Console.WriteLine("------ CART UPTATE-------");
+    CartList();
+    Console.Write("Enter an id for the cart update: ");
     int id = int.Parse(Console.ReadLine());
     Console.Write("Enter the new capacity: ");
     int capacity = int.Parse(Console.ReadLine());
-    Bag c = new Bag(id, capacity);
-    nbag.Update(c);
+    Cart c = new Cart(id, capacity);
+    ncart.Update(c);
   }
 
-  public static void BagRemove(){
-    Console.WriteLine("------BAG REMOVE-------");
-    BagList();
-    Console.Write("Inform user code for excludes bag: ");
+  public static void CartRemove(){
+    Console.WriteLine("------CART REMOVE-------");
+    CartList();
+    Console.Write("Inform user code for excludes cart: ");
     int id = int.Parse(Console.ReadLine());
-    Bag c = nbag.List(id);
-    nbag.Delete(c);
+    Cart c = ncart.List(id);
+    ncart.Delete(c);
   }
 }
