@@ -53,7 +53,7 @@ class MainClass{
         op = 100;
       }
     } while (op != 0);
-    Console.WriteLine ("Bye.....");    
+    Console.WriteLine ("Bye.....");
   }
 
   public static int MenuUser(){
@@ -61,8 +61,8 @@ class MainClass{
     Console.WriteLine("--------- REGISTER USER -----------");
     Console.WriteLine("1 - List users");
     Console.WriteLine("2 - Insert user");
-    Console.WriteLine("3 - Remove user"); 
-    Console.WriteLine("4 - Update user"); 
+    Console.WriteLine("3 - Remove user");
+    Console.WriteLine("4 - Update user");
     Console.WriteLine("0 - Go for register Cart");
     Console.Write("Enter: ");
     int op = int.Parse(Console.ReadLine());
@@ -75,8 +75,8 @@ class MainClass{
     Console.WriteLine("--------- REGISTER Cart -----------");
     Console.WriteLine("1 - List carts");
     Console.WriteLine("2 - Insert cart");
-    Console.WriteLine("3 - Remove cart"); 
-    Console.WriteLine("4 - Update cart"); 
+    Console.WriteLine("3 - Remove cart");
+    Console.WriteLine("4 - Update cart");
     Console.WriteLine("0 - Go for organization books.");
     Console.Write("Enter: ");
     int op = int.Parse(Console.ReadLine());
@@ -208,7 +208,7 @@ class MainClass{
     if (us.Length == 0){
       Console.WriteLine("No users!");
       return;
-    } 
+    }
     foreach(User u in us) Console.WriteLine(u);
     Console.WriteLine();
   }
@@ -253,7 +253,7 @@ class MainClass{
     if (us.Length == 0){
       Console.WriteLine("No carts!");
       return;
-    } 
+    }
     foreach(Cart u in us) Console.WriteLine(u);
     Console.WriteLine();
   }
