@@ -1,6 +1,6 @@
 using System;
 
-class MainClass { 
+class MainClass {
   public static void Main(){
     Circle x1 = new Circle(6);
     Console.WriteLine(x1);
