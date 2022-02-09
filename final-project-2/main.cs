@@ -269,16 +269,15 @@ class MainClass{
 
   public static void CartInsert(){
     Console.WriteLine("-------- REGISTER CART --------------");
-    Console.Write("Enter an id for the cart: ");
-    int id = int.Parse(Console.ReadLine());
     Console.Write("Enter the cart books capacity: ");
     int capacity = int.Parse(Console.ReadLine());
     UserList();
     Console.Write("Inform the cart user code: ");
     int iduser = int.Parse(Console.ReadLine());
-    User u = nuser.List(iduser);
-    Cart b = new Cart(id, capacity,u);
-    ncart.Insert(b);
+    Cart c = new Cart{
+      capacity = capacity,
+    };
+    ncart.Insert(c);
   }
 
   public static void CartUpdate(){

@@ -1,47 +1,41 @@
-
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 class NCart {
-  private Cart[] carts = new Cart[10];
-  private int nc;
+  private List<Cart> carts = new List<Cart>();
 
   public void Insert(Cart l){
-    if (nc == carts.Length) {
-      Array.Resize(ref carts, 2 * carts.Length);
-    }
-    carts[nc] = l;
-    nc++;
+    int max = 0;
+    foreach(Cart obj in carts)
+      if (obj.id > max) max = obj.id;
+    l.id = max + 1;
+    carts.Add(l);
   }
 
   public Cart[] List() {
-    Cart[] c = new Cart[nc];
-    Array.Copy(carts, c, nc);
-    return c;
+    return carts;
   }
 
   public Cart List(int id) {
-    for (int i = 0 ; i < nc; i++)
-      if (carts[i].GetId() == id) return carts[i];
+    for (int i = 0 ; i < carts.Count; i++)
+      if (carts[i].id == id) return carts[i];
     return null;
   }
 
   public void Update(Cart l){
-    Cart c_atual = List(l.GetId());
+    Cart c_atual = List(l.id);
     if (c_atual == null) return;
-    c_atual.SetCapacity(l.GetCapacity());
+    c_atual.capacity = l.capacity;
   }
 
   public void Delete(Cart l){
-    int n = Indice(l);
-    if (n == -1) return;
-    for (int i = n; i < nc-1; i++)
-      carts[i] = carts[i + 1];
-    nc--;
+    if (l != null) carts.Remove(l);
   }
 
-  private int Indice(Cart c){
-    for (int i = 0; i < nc; i++)
-      if(carts[i] == c) return i;
-    return -1;
-  }
+  // private int Indice(Cart c){
+  //   for (int i = 0; i < nc; i++)
+  //     if(carts[i] == c) return i;
+  //   return -1;
+  // }
 }
