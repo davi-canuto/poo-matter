@@ -220,8 +220,8 @@ class MainClass{
 
     Console.Write("Enter the name: ");
     string name = Console.ReadLine();
-    Console.Write("Enter the birth date (dd/mm/yyyy):");
-    DateTime birthdate = DateTime.Parse(Console.ReadLine());
+    Console.Write("Enter the birth date (dd/MM/yyyy):");
+    DateTime birthdate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", null);
     User c = new User{
       name = name, birthdate = birthdate
     };
@@ -245,9 +245,9 @@ class MainClass{
     Console.Write("Enter the new name: ");
     string name = Console.ReadLine();
     Console.Write("Enter the new birthdate: ");
-    DateTime birth = DateTime.Parse(Console.ReadLine());
+    DateTime birthdate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", null);
     User c = new User{
-      id = id, name = name, birthdate = birth
+      id = id, name = name, birthdate = birthdate
     };
     nuser.Update(c);
 
