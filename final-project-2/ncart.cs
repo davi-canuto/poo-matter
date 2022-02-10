@@ -13,7 +13,7 @@ class NCart {
     carts.Add(l);
   }
 
-  public Cart[] List() {
+  public List<Cart> List() {
     return carts;
   }
 
@@ -33,9 +33,4 @@ class NCart {
     if (l != null) carts.Remove(l);
   }
 
-  // private int Indice(Cart c){
-  //   for (int i = 0; i < nc; i++)
-  //     if(carts[i] == c) return i;
-  //   return -1;
-  // }
 }
