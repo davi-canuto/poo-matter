@@ -257,12 +257,12 @@ class MainClass{
 
   public static void CartList(){
     Console.WriteLine("------- Cart LIST ---------");
-    Cart[] us = ncart.List();
-    if (us.Length == 0){
+    List<Cart> cs = ncart.List();
+    if (cs.Count == 0){
       Console.WriteLine("No carts!");
       return;
     }
-    foreach(Cart u in us) Console.WriteLine(u);
+    foreach(Cart u in cs) Console.WriteLine(u);
     Console.WriteLine();
   }
 
@@ -276,6 +276,7 @@ class MainClass{
     int iduser = int.Parse(Console.ReadLine());
     Cart c = new Cart{
       capacity = capacity,
+      user = iduser
     };
     ncart.Insert(c);
   }
@@ -287,7 +288,7 @@ class MainClass{
     int id = int.Parse(Console.ReadLine());
     Console.Write("Enter the new capacity: ");
     int capacity = int.Parse(Console.ReadLine());
-    Cart c = new Cart(id, capacity);
+    Cart c = new Cart{id = id, capacity = capacity};
     ncart.Update(c);
   }
 

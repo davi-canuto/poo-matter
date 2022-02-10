@@ -1,9 +1,9 @@
 using System;
 
 class Cart{
-  private int id { get; set; }
-  private int capacity { get; set; }
-  private User user;
+  public int id { get; set; }
+  public int capacity { get; set; }
+  public User user;
 
   public override string ToString(){
     if (user == null)
