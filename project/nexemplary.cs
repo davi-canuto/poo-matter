@@ -2,39 +2,33 @@ using System;
 using System.Collections.Generic;
 
 class NExemplary{
-  private List<Exemplart> exemplarys = new List<Exemplary>();
+  private List<Exemplary> exemplarys = new List<Exemplary>();
 
-  public void Insert(Book l){
-    if (nc == books.Length) {
-      Array.Resize(ref books, 2 * books.Length);
-    }
-    books[nc] = l;
-    nc++;
+  public void Insert(Exemplary l){
+    int max = 0;
+    foreach(Exemplary obj in exemplarys)
+      if(obj.id > max) max = obj.id;
+    l.id = max+1;
+    exemplarys.Add(l);
   }
 
-  public Book[] List() {
-    Book[] c = new Book[nc];
-    Array.Copy(books, c, nc);
-    return c;
+  public List<Exemplary> List() {
+    return exemplarys;
   }
 
-  public Book List(int id) {
-    for (int i = 0 ; i < nc; i++)
-      if (books[i].GetId() == id) return books[i];
+  public Exemplary List(int id) {
+    for (int i = 0 ; i < exemplarys.Count; i++)
+      if (exemplarys[i].id == id) return exemplarys[i];
     return null;
   }
 
-  public void Delete(Book l){
-    int n = Indice(l);
-    if (n == -1) return;
-    for (int i = n; i < nc-1; i++)
-      books[i] = books[i + 1];
-    nc--;
+  public void Delete(Exemplary l){
+    if (l != null) exemplarys.Remove(l);
   }
 
-  private int Indice(Book c){
-    for (int i = 0; i < nc; i++)
-      if(books[i] == c) return i;
-    return -1;
+  public void Update(Exemplary l){
+    Exemplary c_atual = List(l.id);
+    if (c_atual == null) return;
+    c_atual.title = l.title;
   }
 }

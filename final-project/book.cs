@@ -47,7 +47,7 @@ class Book {
 
   public override string ToString(){
     if (cart == null)
-      return id + " - " + title + " - Gender: " + gender;  
+      return id + " - " + title + " - Gender: " + gender;
     else
       return id + " - " + title + " - Gender: " + gender + ", Cart id: " + cart.GetId();
   }

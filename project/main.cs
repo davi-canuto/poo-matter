@@ -46,6 +46,7 @@ class MainClass{
           case 1 : BookList(); break;
           case 2 : BookInsert(); break;
           case 3 : BookRemove();break;
+          case 4 : BookUpdate();break;
         }
       }
       catch (Exception erro) {
@@ -53,6 +54,7 @@ class MainClass{
         op = 100;
       }
     } while (op != 0);
+
     Console.WriteLine ("Bye.....");
   }
 
@@ -88,9 +90,10 @@ class MainClass{
     Console.WriteLine();
     Console.WriteLine("------------- ORGANIZATION BOOKS -------------");
     Console.WriteLine();
-    Console.WriteLine("1 - List the books that are in the cart.");
-    Console.WriteLine("2 - Insert book in your cart.");
-    Console.WriteLine("3 - Remove book the cart.");
+    Console.WriteLine("1 - List the books you have in the library.");
+    Console.WriteLine("2 - Insert book.");
+    Console.WriteLine("3 - Remove book.");
+    Console.WriteLine("4 - Updated book.");
     Console.WriteLine("0 - EXIT!!!!.");
     Console.Write("Enter: ");
     int op = int.Parse(Console.ReadLine());
@@ -100,9 +103,9 @@ class MainClass{
 
 /*   ------------------ BOOK CODE ------------------- */
   public static void BookList(){
-    Console.WriteLine("------- BOOKS IN THE Cart ---------");
-    Book[] cs = nbook.List();
-    if (cs.Length == 0){
+    Console.WriteLine("------- BOOKS ---------");
+    List<Book> cs = nbook.List();
+    if (cs.Count == 0){
       Console.WriteLine("No books!");
       return;
     }
@@ -111,19 +114,16 @@ class MainClass{
   }
 
   public static void BookInsert(){
-    Console.WriteLine("-------- INSERT BOOKS --------------");
-    Console.Write("Enter an id for the book: ");
-    int id = int.Parse(Console.ReadLine());
+    Console.WriteLine("-------- REGISTER BOOKS --------------");
+
     Console.Write("Enter the title: ");
     string title = Console.ReadLine();
     Console.Write("Enter the gender: ");
     string gender = Console.ReadLine();
-    CartList();
-    Console.Write("Inform the Cart code:");
-    int idbook = int.Parse(Console.ReadLine());
-    Cart b = ncart.List(idbook);
-    Book i = new Book(id,title,gender,b);
-    nbook.Insert(i);
+    Book c = new Book{
+      title = title, gender = gender
+    };
+    nbook.Insert(c);
   }
 
   public static void BookRemove(){
@@ -134,6 +134,23 @@ class MainClass{
     Book c = nbook.List(id);
     nbook.Delete(c);
   }
+
+  public static void BookUpdate(){
+    Console.WriteLine("------ BOOK UPDATE -------");
+    BookList();
+    Console.Write("Enter an id for the book update: ");
+    int id = int.Parse(Console.ReadLine());
+    Console.Write("Enter the new title: ");
+    string title = Console.ReadLine();
+    Console.Write("Enter the new gender: ");
+    string gender = Console.ReadLine();
+    Book c = new Book{
+      id = id, title = title, gender = gender
+    };
+    nbook.Update(c);
+
+  }
+
 
 
 /*   ------------------ USER CODE ------------------- */

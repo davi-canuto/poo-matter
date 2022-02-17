@@ -1,40 +1,33 @@
 using System;
+using System.Collections.Generic;
 
 class NBook{
-  private Book[] books = new Book[10];
-  private int nc;
-
+  private List<Book> books = new List<Book>();
   public void Insert(Book l){
-    if (nc == books.Length) {
-      Array.Resize(ref books, 2 * books.Length);
-    }
-    books[nc] = l;
-    nc++;
+   int max = 0;
+    foreach(Book obj in books)
+      if (obj.id > max) max = obj.id;
+    l.id = max + 1;
+    books.Add(l);
   }
 
-  public Book[] List() {
-    Book[] c = new Book[nc];
-    Array.Copy(books, c, nc);
-    return c;
+  public List<Book> List() {
+    return books;
   }
 
   public Book List(int id) {
-    for (int i = 0 ; i < nc; i++)
-      if (books[i].GetId() == id) return books[i];
-    return null;                                  
+    for (int i = 0 ; i < books.Count; i++)
+      if (books[i].id == id) return books[i];
+    return null;
   }
 
   public void Delete(Book l){
-    int n = Indice(l);
-    if (n == -1) return;
-    for (int i = n; i < nc-1; i++)
-      books[i] = books[i + 1];
-    nc--;
+    if (l != null) books.Remove(l);
   }
-
-  private int Indice(Book c){
-    for (int i = 0; i < nc; i++)
-      if(books[i] == c) return i;
-    return -1;
+  public void Update(Book l){
+    Book c_atual = List(l.id);
+    if (c_atual == null) return;
+    c_atual.title = l.title;
+    c_atual.gender = l.gender;
   }
 }
