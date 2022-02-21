@@ -6,6 +6,7 @@ class MainClass{
   private static NBook nbook = new NBook();
   private static NUser nuser = new NUser();
   private static NCart ncart = new NCart();
+  private static NExemplary nexemplary = new NExemplary();
   public static void Main(){
     int op = 0;
     int o = 0;
@@ -47,6 +48,12 @@ class MainClass{
           case 2 : BookInsert(); break;
           case 3 : BookRemove();break;
           case 4 : BookUpdate();break;
+          case 5 : ExemplaryList(); break;
+          case 6 : ExemplaryInsert(); break;
+          case 7 : ExemplaryRemove();break;
+          case 8 : ExemplaryUpdate();break;
+          case 99 : CartList();break;
+          // case 100 : CartLoan();break;
         }
       }
       catch (Exception erro) {
@@ -88,12 +95,18 @@ class MainClass{
 
   public static int MenuBook(){
     Console.WriteLine();
-    Console.WriteLine("------------- ORGANIZATION BOOKS -------------");
+    Console.WriteLine("------------- BOOK AND EXEMPLARYS -------------");
     Console.WriteLine();
     Console.WriteLine("1 - List the books you have in the library.");
     Console.WriteLine("2 - Insert book.");
     Console.WriteLine("3 - Remove book.");
     Console.WriteLine("4 - Updated book.");
+    Console.WriteLine("5 - List the exemplarys in your cart.");
+    Console.WriteLine("6 - Add a exemplary to your cart.");
+    Console.WriteLine("7 - Remove a exemplary from your cart.");
+    Console.WriteLine("8 - Update exemplary.");
+    Console.WriteLine("99 - View your cart.");
+    Console.WriteLine("100 - Loan your exemplarys in the cart.");
     Console.WriteLine("0 - EXIT!!!!.");
     Console.Write("Enter: ");
     int op = int.Parse(Console.ReadLine());
@@ -102,7 +115,7 @@ class MainClass{
   }
 
 /*   ------------------ BOOK CODE ------------------- */
-  public static void BookList(){
+    public static void BookList(){
     Console.WriteLine("------- BOOKS ---------");
     List<Book> cs = nbook.List();
     if (cs.Count == 0){
@@ -150,7 +163,55 @@ class MainClass{
     nbook.Update(c);
 
   }
+  /* ------------------ EXEMPLARY CODE ---------------*/
+    public static void ExemplaryList(){
+    Console.WriteLine("------- EXEMPLARYS ---------");
+    List<Exemplary> cs = nexemplary.List();
+    if (cs.Count == 0){
+      Console.WriteLine("No exemplarys!");
+      return;
+    }
+    foreach(Exemplary c in cs) Console.WriteLine(c);
+    Console.WriteLine();
+  }
 
+
+  public static void ExemplaryInsert(){
+    Console.WriteLine("-------- REGISTER EXEMPLARYS --------------");
+
+    Console.Write("Enter the title: ");
+    string title = Console.ReadLine();
+    Console.Write("Enter the cart_id: ");
+    int cart = int.Parse(Console.ReadLine());
+    Exemplary c = new Exemplary{
+      title = title, cart = cart
+    };
+    nexemplary.Insert(c);
+  }
+
+  public static void ExemplaryRemove(){
+    Console.WriteLine("------EXEMPLARY REMOVE-------");
+    ExemplaryList();
+    Console.Write("Inform exemplary code for excludes exemplary: ");
+    int id = int.Parse(Console.ReadLine());
+    Exemplary c = nexemplary.List(id);
+    nexemplary.Delete(c);
+  }
+
+  public static void ExemplaryUpdate(){
+    Console.WriteLine("------ EXEMPLARY UPDATE -------");
+    ExemplaryList();
+    Console.Write("Enter an id for the exemplary update: ");
+    int id = int.Parse(Console.ReadLine());
+    Console.Write("Enter the new title: ");
+    string title = Console.ReadLine();
+    Console.Write("Enter the new cart: ");
+    int cart = int.Parse(Console.ReadLine());
+    Exemplary c = new Exemplary{
+      id = id, title = title, cart = cart
+    };
+    nexemplary.Update(c);
+  }
 
 
 /*   ------------------ USER CODE ------------------- */
