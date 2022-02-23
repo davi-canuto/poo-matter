@@ -53,7 +53,7 @@ class MainClass{
           case 5 : ExemplaryList(); break;
           case 6 : ExemplaryInsert(); break;
           case 99 : CartList();break;
-          // case 100 : CartLoan();break;
+          case 100 : CartLoan();break;
         }
       }
       catch (Exception erro) {
@@ -101,7 +101,7 @@ class MainClass{
     Console.WriteLine("2 - Insert book.");
     Console.WriteLine("3 - Remove book.");
     Console.WriteLine("4 - Updated book.");
-    Console.WriteLine("5 - List the exemplarys in your cart.");
+    Console.WriteLine("5 - List the exemplarys.");
     Console.WriteLine("6 - Add a exemplary to your cart.");
     Console.WriteLine("99 - View your cart.");
     Console.WriteLine("100 - Loan your exemplarys in the cart.");
@@ -176,9 +176,10 @@ class MainClass{
 
   public static void ExemplaryInsert(){
     Console.WriteLine("-------- ADD EXEMPLARY --------------");
-
+    BookList();
     Console.Write("Enter the title: ");
     string title = Console.ReadLine();
+    CartList();
     Console.Write("Enter the cart_id: ");
     int cart = int.Parse(Console.ReadLine());
     Exemplary c = new Exemplary{
@@ -295,11 +296,12 @@ class MainClass{
     ncart.Delete(c);
   }
   public static void CartLoan(){
-    Console.WriteLine("------CART REMOVE-------");
+    Console.WriteLine("------ CART LOAN -------");
     CartList();
-    Console.Write("Inform user code for excludes cart: ");
+    Console.Write("Inform id code cart for loan: ");
     int id = int.Parse(Console.ReadLine());
+
     Cart c = ncart.List(id);
-    ncart.Delete(c);
+    Console.WriteLine($"Cart borrowed: {c} Status: Borrowed");
   }
 }
