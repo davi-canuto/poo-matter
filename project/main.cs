@@ -159,7 +159,6 @@ class MainClass{
       id = id, title = title, gender = gender
     };
     nbook.Update(c);
-
   }
   /* ------------------ EXEMPLARY CODE ---------------*/
     public static void ExemplaryList(){
