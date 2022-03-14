@@ -4,8 +4,20 @@ using System.Collections;
 using System.Collections.Generic;
 
 class NUser{
+  private NUser() { }
+  static NUser obj = new NUser();
+  public static NUser Singleton { get => obj; }
   private List<User> users = new List<User>();
+  public void Open() {
+    Archive<List<User>> f = new Archive<List<User>>();
+    clientes = f.Open("./users.xml");
+  }
+  public void ToSave() {
+    Archive<List<User>> f = new Archive<List<User>>();
+    f.ToSave("./users.xml", List());
+  }
   public List<User> List() {
+    users.Sort();
     return users;
   }
   public User List(int id) {
@@ -32,10 +44,4 @@ class NUser{
   public void Delete(User l){
     if (l != null) users.Remove(l);
   }
-
-  // private int Indice(User c){
-  //   for (int i = 0; i < nc; i++)
-  //     if(users[i] == c) return i;
-  //   return -1;
-  // }
 }

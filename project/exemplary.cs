@@ -6,6 +6,9 @@ class Exemplary {
   public int cart { get; set; }
 
   public override string ToString(){
-    return id + " - " + title + " -  Cart_id: " + cart;
+    if (cart == null)
+      return id + " - " + title;
+    else
+      return id + " - " + title + " -  Cart_id: " + cart;
   }
 }
