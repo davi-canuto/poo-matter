@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using System;
 
 class Cart{
@@ -9,3 +10,5 @@ class Cart{
     return id + " - " + " Capacity: " + capacity + " Books - User_id: " + user;
   }
 }
+=======
+>>>>>>> chore
