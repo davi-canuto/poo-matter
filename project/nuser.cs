@@ -1,6 +1,5 @@
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 class NUser{
@@ -34,14 +33,14 @@ class NUser{
   }
 
 
-  public void Update(User l){
-    User c_atual = List(l.id);
-    if (c_atual == null) return;
-    c_atual.name = l.name;
-    c_atual.birthdate = l.birthdate;
-  }
+    public void Update(User l){
+      User c_atual = List(l.id);
+      if (c_atual == null) return;
+      c_atual.name = l.name;
+      c_atual.birthdate = l.birthdate;
+    }
 
-  public void Delete(User l){
-    if (l != null) users.Remove(l);
-  }
+    public void Delete(User l){
+      if (l != null) users.Remove(l);
+    }
 }

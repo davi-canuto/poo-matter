@@ -31,5 +31,4 @@ class NCart {
   public void Delete(Cart l){
     if (l != null) carts.Remove(l);
   }
-
 }

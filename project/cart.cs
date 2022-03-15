@@ -4,12 +4,9 @@ class Cart{
   public int id;
   public int capacity;
 
-  private Exemplary[] exemplays = new Exemplary[10];
+  private Exemplary[] exemplarys = new Exemplary[10];
   private User user;
-  private int user;
   private int np;
-  public int id { get => id; set => id = value; }
-  public string capacity { get => capacity; set => capacity = value; }
   public Cart() { }
 
   public Cart(int id, int capacity) {
@@ -30,6 +27,9 @@ class Cart{
     this.user = user;
     this.userId = user.GetId();
   }
+  public void SetExemplary(User exemplary) {
+    this.exemplary = exemplary;
+  }
   public int GetId() {
     return id;
   }
@@ -38,6 +38,9 @@ class Cart{
   }
   public User GetUser() {
     return user;
+  }
+  public Exemplary GetExemplary() {
+    return exemplary;
   }
   public Exemplary[] ListExemplarys() {
     Exemplary[] c = new Exemplary[np];
@@ -69,6 +72,6 @@ class Cart{
     if (user == null)
       return id + " - " + " Capacity: " + capacity + " Books ";
     else
-      return id + " - " + " Capacity: " + capacity + " Books , User_Id: " + user.GetId();
+      return id + " - " + " Capacity: " + capacity + " Books , User_Id: " + user.id;
   }
 }
