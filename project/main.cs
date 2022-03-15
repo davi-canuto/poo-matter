@@ -5,10 +5,10 @@ using System.Threading;
 using System.Linq;
 class MainClass{
 
-  private static NUser nuser = NUser.Singleton;
-  private static NBook nbook = NBook.Singleton;
-  private static NCart ncart = NCart.Singleton;
-  private static NExemplary nexemplary = NExemplary.Singleton;
+  private static NUser nuser = new NUser();
+  private static NBook nbook = new NBook();
+  private static NCart ncart = new NCart();
+  private static NExemplary nexemplary = new NExemplary();
   enum LoanStatus {borrowed, analyze }
   public static void Main(){
 
@@ -61,8 +61,7 @@ class MainClass{
           case 2 : BookInsert(); break;
           case 3 : BookRemove();break;
           case 4 : BookUpdate();break;
-          case 5 : ExemplaryList(); break;
-          case 6 : ExemplaryInsert(); break;
+          case 5 : ExemplaryInsert(); break;
           case 99 : CartList();break;
           case 100 : CartLoan();break;
         }
@@ -112,8 +111,7 @@ class MainClass{
     Console.WriteLine("2 - Insert book.");
     Console.WriteLine("3 - Remove book.");
     Console.WriteLine("4 - Updated book.");
-    Console.WriteLine("5 - List the exemplarys.");
-    Console.WriteLine("6 - Add a exemplary to your cart.");
+    Console.WriteLine("5 - Add a exemplary to your cart.");
     Console.WriteLine("99 - View your cart.");
     Console.WriteLine("100 - Loan your exemplarys in the cart.");
     Console.WriteLine("0 - EXIT!!!!.");
@@ -170,16 +168,6 @@ class MainClass{
     nbook.Update(c);
   }
   /* ------------------ EXEMPLARY CODE ---------------*/
-    public static void ExemplaryList(){
-    Console.WriteLine("------- EXEMPLARYS ---------");
-    Exemplary[] cs = nexemplary.List();
-    if (cs.Length == 0) {
-      Console.WriteLine("No Exemplarys registered.");
-      return;
-    }
-    foreach(Exemplary c in cs) Console.WriteLine(c);
-    Console.WriteLine();
-  }
 
   public static void ExemplaryInsert(){
     Console.WriteLine("-------- ADD EXEMPLARY --------------");
@@ -191,8 +179,9 @@ class MainClass{
     CartList();
     Console.Write("Enter the cart_id: ");
     int cartid = int.Parse(Console.ReadLine());
-    Cart c = ncart.List(cartid);
     Exemplary e = new Exemplary(id,title);
+    Cart c = ncart.List(cartid);
+
     c.InsertExemplary(e);
   }
 
@@ -213,13 +202,13 @@ class MainClass{
   public static void UserInsert(){
     Console.WriteLine("-------- REGISTER USER --------------");
 
+    Console.Write("Enter the id for user: ");
+    int id = int.Parse(Console.ReadLine());
     Console.Write("Enter the name: ");
     string name = Console.ReadLine();
     Console.Write("Enter the birth date (dd/MM/yyyy):");
     DateTime birthdate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", null);
-    User c = new User{
-      name = name, birthdate = birthdate
-    };
+    User c = new User(id,name,birthdate);
     nuser.Insert(c);
   }
 
@@ -250,22 +239,38 @@ class MainClass{
 
 /*   ------------------ Cart CODE ------------------- */
 
+  // public static void CartList(){
+  //   Console.WriteLine("------- Cart LIST ---------");
+  //   Cart[] cs = ncart.List();
+  //   Exemplary[] cx = cs.ListExemplarys();
+  //   if (cs.Length == 0){
+  //     Console.WriteLine("No carts!");
+  //     return;
+  //   }else{
+  //     foreach(Cart u in cs) Console.WriteLine(u);
+  //     Console.WriteLine();
+  //     Console.WriteLine("|||||||| Exemplarys ||||||");
+  //     if (cx.Length == 0){
+  //       Console.WriteLine("No exemplarys in your cart!");
+  //       return;
+  //     }
+  //     foreach(Exemplary c in cx) Console.WriteLine(c);
+  //     Console.WriteLine();
+  //   }
+  // }
   public static void CartList(){
     Console.WriteLine("------- Cart LIST ---------");
     Cart[] cs = ncart.List();
-    Exemplary[] cx = nexemplary.List();
     if (cs.Length == 0){
       Console.WriteLine("No carts!");
       return;
     }else{
-      foreach(Cart u in cs) Console.WriteLine(u);
-      Console.WriteLine();
-      Console.WriteLine("|||||||| Exemplarys ||||||");
-      if (cx.Length == 0){
-        Console.WriteLine("No exemplarys in your cart!");
-        return;
+      foreach(Cart u in cs){
+        Console.WriteLine(u);
+        int id = u.GetId();
+        Cart car = ncart.List(id);
+        Console.WriteLine(car.ListExemplarys());
       }
-      foreach(Exemplary c in cx) Console.WriteLine(c);
       Console.WriteLine();
     }
   }

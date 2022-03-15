@@ -11,7 +11,7 @@ class NCart {
 
   private Cart[] carts = new Cart[10];
   private int np;
-  private NCart(){ }
+  public NCart(){ }
   public void Open(){
     Archive<Cart[]> f = new Archive<Cart[]>();
     carts = f.Open("./carts.xml");

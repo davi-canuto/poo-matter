@@ -6,9 +6,9 @@ using System.Linq;
 
 class NBook{
   static NBook obj = new NBook();
-  public static NBook Singleton;
   private Book[] books = new Book[10];
   private int np;
+  public NBook(){ }
 
   public void Open(){
     Archive<Book[]> f = new Archive<Book[]>();

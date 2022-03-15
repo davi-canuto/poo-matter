@@ -9,10 +9,9 @@ using System.Collections.Generic;
 
 class NUser{
   static NUser obj = new NUser();
-  public static NUser Singleton;
   private User[] users = new User[10];
   private int np;
-  private NUser() { }
+  public NUser() { }
   public void Open() {
     Archive<User[]> f = new Archive<User[]>();
     users = f.Open("./users.xml");

@@ -10,7 +10,7 @@ class NExemplary{
   static NExemplary obj = new NExemplary();
   private Exemplary[] exemplarys = new Exemplary[10];
   private int np;
-  private NExemplary(){ }
+  public NExemplary(){ }
   public void Open(){
     Archive<Exemplary[]> f = new Archive<Exemplary[]>();
     exemplarys = f.Open("./exemplarys.xml");
