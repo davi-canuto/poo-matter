@@ -6,6 +6,7 @@ class Cart{
 
   private Exemplary[] exemplarys = new Exemplary[10];
   private User user;
+  private int userId;
   private int np;
   public Cart() { }
 
@@ -15,56 +16,43 @@ class Cart{
   }
   public Cart(int id, int capacity, User user) : this(id, capacity) {
     this.user = user;
-    this.userId = user.GetId();
+    this.userId = user.id;
   }
   public void SetId(int id) {
     this.id = id;
   }
-  public void SetCapacity(string capacity) {
+  public void SetCapacity(int capacity) {
     this.capacity = capacity;
   }
-  public void SetUser(User user) {
-    this.user = user;
-    this.userId = user.GetId();
-  }
-  public void SetExemplary(User exemplary) {
-    this.exemplary = exemplary;
-  }
+
   public int GetId() {
     return id;
   }
-  public string GetCapacity() {
+  public int GetCapacity() {
     return capacity;
-  }
-  public User GetUser() {
-    return user;
-  }
-  public Exemplary GetExemplary() {
-    return exemplary;
   }
   public Exemplary[] ListExemplarys() {
     Exemplary[] c = new Exemplary[np];
-    Array.Copy(exemplays, c, np);
+    Array.Copy(exemplarys, c, np);
     return c;
   }
    public void InsertExemplary(Exemplary p) {
-    if (np == exemplays.Length) {
-      Array.Resize(ref exemplays, 2 * exemplays.Length);
+    if (np == exemplarys.Length) {
+      Array.Resize(ref exemplarys, 2 * exemplarys.Length);
     }
-    exemplays[np] = p;
+    exemplarys[np] = p;
     np++;
   }
   private int IndiceExemplary(Exemplary p) {
     for (int i = 0; i < np; i++)
-      if (exemplays[i] == p) return i;
+      if (exemplarys[i] == p) return i;
     return -1;
   }
   public void DeleteExemplary(Exemplary p) {
-    // Exclui um produto da categoria
     int n = IndiceExemplary(p);
     if (n == -1) return;
     for (int i = n; i < np - 1; i++)
-      exemplays[i] = exemplays[i + 1];
+      exemplarys[i] = exemplarys[i + 1];
     np--;
   }
 

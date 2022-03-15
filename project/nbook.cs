@@ -1,33 +1,61 @@
 using System;
-using System.Collections.Generic;
+using System.Xml.Serialization;
+using System.Text;
+using System.IO;
+using System.Linq;
 
 class NBook{
-  private List<Book> books = new List<Book>();
-  public void Insert(Book l){
-   int max = 0;
-    foreach(Book obj in books)
-      if (obj.id > max) max = obj.id;
-    l.id = max + 1;
-    books.Add(l);
-  }
+  static NBook obj = new NBook();
+  public static NBook Singleton;
+  private Book[] books = new Book[10];
+  private int np;
 
-  public List<Book> List() {
-    return books;
+  public void Open(){
+    Archive<Book[]> f = new Archive<Book[]>();
+    books = f.Open("./books.xml");
+    np = books.Length;
   }
-
+  public void ToSave(){
+    Archive<Book[]> f = new Archive<Book[]>();
+    f.ToSave("./books.xml", List());
+  }
+  public Book[] List() {
+    Book[] p = new Book[np];
+    Array.Copy(books, p, np);
+    return p;
+  }
   public Book List(int id) {
-    for (int i = 0 ; i < books.Count; i++)
-      if (books[i].id == id) return books[i];
+    for (int i = 0; i < np; i++)
+      if (books[i].GetId() == id) return books[i];
     return null;
   }
 
-  public void Delete(Book l){
-    if (l != null) books.Remove(l);
+  public void Insert(Book p) {
+    if (np == books.Length) {
+      Array.Resize(ref books, 2 * books.Length);
+    }
+    books[np] = p;
+    np++;
   }
-  public void Update(Book l){
-    Book c_atual = List(l.id);
-    if (c_atual == null) return;
-    c_atual.title = l.title;
-    c_atual.gender = l.gender;
+
+  public void Update(Book p) {
+    Book p_atual = List(p.GetId());
+    if (p_atual == null) return;
+    p_atual.SetTitle(p.GetTitle());
+    p_atual.SetGender(p.GetGender());
+  }
+
+  private int Indice(Book p) {
+    for(int i = 0; i < np; i++)
+      if (books[i] == p) return i;
+    return -1;
+  }
+
+  public void Delete(Book p) {
+    int n = Indice(p);
+    if (n == -1) return;
+    for (int i = n; i < np - 1; i++)
+      books[i] = books[i + 1];
+    np--;
   }
 }

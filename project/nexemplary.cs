@@ -1,34 +1,61 @@
 using System;
+using System.Xml.Serialization;
+using System.Text;
+using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 
 class NExemplary{
-  private List<Exemplary> exemplarys = new List<Exemplary>();
-
-  public void Insert(Exemplary l){
-    int max = 0;
-    foreach(Exemplary obj in exemplarys)
-      if(obj.id > max) max = obj.id;
-    l.id = max+1;
-    exemplarys.Add(l);
+  public static NExemplary Singleton;
+  static NExemplary obj = new NExemplary();
+  private Exemplary[] exemplarys = new Exemplary[10];
+  private int np;
+  private NExemplary(){ }
+  public void Open(){
+    Archive<Exemplary[]> f = new Archive<Exemplary[]>();
+    exemplarys = f.Open("./exemplarys.xml");
+    np = exemplarys.Length;
   }
-
-  public List<Exemplary> List() {
-    return exemplarys;
+  public void ToSave(){
+    Archive<Exemplary[]> f = new Archive<Exemplary[]>();
+    f.ToSave("./exemplarys.xml", List());
   }
-
+   public Exemplary[] List() {
+    Exemplary[] p = new Exemplary[np];
+    Array.Copy(exemplarys, p, np);
+    return p;
+  }
   public Exemplary List(int id) {
-    for (int i = 0 ; i < exemplarys.Count; i++)
-      if (exemplarys[i].id == id) return exemplarys[i];
+    for (int i = 0; i < np; i++)
+      if (exemplarys[i].GetId() == id) return exemplarys[i];
     return null;
   }
 
-  public void Delete(Exemplary l){
-    if (l != null) exemplarys.Remove(l);
+  public void Insert(Exemplary p) {
+    if (np == exemplarys.Length) {
+      Array.Resize(ref exemplarys, 2 * exemplarys.Length);
+    }
+    exemplarys[np] = p;
+    np++;
   }
 
-  public void Update(Exemplary l){
-    Exemplary c_atual = List(l.id);
-    if (c_atual == null) return;
-    c_atual.title = l.title;
+  public void Update(Exemplary p) {
+    Exemplary p_atual = List(p.GetId());
+    if (p_atual == null) return;
+    p_atual.SetTitle(p.GetTitle());
+  }
+
+  private int Indice(Exemplary p) {
+    for(int i = 0; i < np; i++)
+      if (exemplarys[i] == p) return i;
+    return -1;
+  }
+
+  public void Delete(Exemplary p) {
+    int n = Indice(p);
+    if (n == -1) return;
+    for (int i = n; i < np - 1; i++)
+      exemplarys[i] = exemplarys[i + 1];
+    np--;
   }
 }

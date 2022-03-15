@@ -1,46 +1,64 @@
 
 using System;
+using System.Xml.Serialization;
+using System.Text;
+using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 
+
 class NUser{
-  private NUser() { }
   static NUser obj = new NUser();
-  public static NUser Singleton { get => obj; }
-  private List<User> users = new List<User>();
+  public static NUser Singleton;
+  private User[] users = new User[10];
+  private int np;
+  private NUser() { }
   public void Open() {
-    Archive<List<User>> f = new Archive<List<User>>();
-    clientes = f.Open("./users.xml");
+    Archive<User[]> f = new Archive<User[]>();
+    users = f.Open("./users.xml");
+    np = users.Length;
   }
   public void ToSave() {
-    Archive<List<User>> f = new Archive<List<User>>();
+    Archive<User[]> f = new Archive<User[]>();
     f.ToSave("./users.xml", List());
   }
-  public List<User> List() {
-    users.Sort();
-    return users;
+  public User[] List() {
+    User[] p = new User[np];
+    Array.Copy(users, p, np);
+    return p;
   }
   public User List(int id) {
-    for (int i = 0 ; i < users.Count; i++)
-      if (users[i].id == id) return users[i];
+    for (int i = 0; i < np; i++)
+      if (users[i].GetId() == id) return users[i];
     return null;
   }
-  public void Insert(User l){
-    int max = 0;
-    foreach(User obj in users)
-      if (obj.id > max) max = obj.id;
-    l.id = max + 1;
-    users.Add(l);
+
+  public void Insert(User p) {
+    if (np == users.Length) {
+      Array.Resize(ref users, 2 * users.Length);
+    }
+    users[np] = p;
+    np++;
   }
 
+  public void Update(User p) {
+    User p_atual = List(p.GetId());
+    if (p_atual == null) return;
+    p_atual.SetName(p.GetName());
+    p_atual.SetBirthdate(p.GetBirthdate());
+  }
 
-    public void Update(User l){
-      User c_atual = List(l.id);
-      if (c_atual == null) return;
-      c_atual.name = l.name;
-      c_atual.birthdate = l.birthdate;
-    }
+  private int Indice(User p) {
+    for(int i = 0; i < np; i++)
+      if (users[i] == p) return i;
+    return -1;
+  }
 
-    public void Delete(User l){
-      if (l != null) users.Remove(l);
-    }
+  public void Delete(User p) {
+    int n = Indice(p);
+    if (n == -1) return;
+    for (int i = n; i < np - 1; i++)
+      users[i] = users[i + 1];
+    np--;
+  }
 }

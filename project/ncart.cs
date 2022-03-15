@@ -2,14 +2,16 @@ using System;
 using System.Xml.Serialization;
 using System.Text;
 using System.IO;
+using System.Linq;
+using System.Collections.Generic;
 
 class NCart {
-  private NCart(){ }
   static NCart obj = new NCart();
-  public static NCart Singleton { get => obj; }
+  public static NCart Singleton;
 
   private Cart[] carts = new Cart[10];
   private int np;
+  private NCart(){ }
   public void Open(){
     Archive<Cart[]> f = new Archive<Cart[]>();
     carts = f.Open("./carts.xml");

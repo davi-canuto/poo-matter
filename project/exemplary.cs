@@ -1,4 +1,9 @@
 using System;
+using System.Xml.Serialization;
+using System.Text;
+using System.IO;
+using System.Linq;
+using System.Collections.Generic;
 
 class Exemplary {
   public int id;
@@ -44,6 +49,6 @@ class Exemplary {
     if (cart == null)
       return id + " - " + title;
     else
-      return id + " - " + title + " -  Cart_id: " + cart.GetId();
+      return id + " - " + title + " -  Cart_id: " + cart.id;
   }
 }

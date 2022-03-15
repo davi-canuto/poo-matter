@@ -1,15 +1,26 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-
+using System.Globalization;
+using System.Threading;
+using System.Linq;
 class MainClass{
-  private static NBook nbook = new NBook();
-  private static NUser nuser = new NUser();
-  private static NCart ncart = new NCart();
-  private static NExemplary nexemplary = new NExemplary();
 
+  private static NUser nuser = NUser.Singleton;
+  private static NBook nbook = NBook.Singleton;
+  private static NCart ncart = NCart.Singleton;
+  private static NExemplary nexemplary = NExemplary.Singleton;
   enum LoanStatus {borrowed, analyze }
   public static void Main(){
+
+    try {
+      nuser.Open();
+      ncart.Open();
+      nexemplary.Open();
+      nbook.Open();
+    }
+    catch(Exception erro) {
+      Console.WriteLine(erro.Message);
+    }
     int op = 0;
     int o = 0;
     int p = 0 ;
@@ -115,9 +126,9 @@ class MainClass{
 /*   ------------------ BOOK CODE ------------------- */
     public static void BookList(){
     Console.WriteLine("------- BOOKS ---------");
-    List<Book> cs = nbook.List();
-    if (cs.Count == 0){
-      Console.WriteLine("No books!");
+    Book[] cs = nbook.List();
+    if (cs.Length == 0) {
+      Console.WriteLine("No books registered.");
       return;
     }
     foreach(Book c in cs) Console.WriteLine(c);
@@ -127,18 +138,18 @@ class MainClass{
   public static void BookInsert(){
     Console.WriteLine("-------- REGISTER BOOKS --------------");
 
+    Console.Write("Enter the code for book: ");
+    int id = int.Parse(Console.ReadLine());
     Console.Write("Enter the title: ");
     string title = Console.ReadLine();
     Console.Write("Enter the gender: ");
     string gender = Console.ReadLine();
-    Book c = new Book{
-      title = title, gender = gender
-    };
+    Book c = new Book(id, title, gender);
     nbook.Insert(c);
   }
 
   public static void BookRemove(){
-    Console.WriteLine("------Book REMOVE-------");
+    Console.WriteLine("------BOOK REMOVE-------");
     BookList();
     Console.Write("Inform user code for excludes Book: ");
     int id = int.Parse(Console.ReadLine());
@@ -155,48 +166,46 @@ class MainClass{
     string title = Console.ReadLine();
     Console.Write("Enter the new gender: ");
     string gender = Console.ReadLine();
-    Book c = new Book{
-      id = id, title = title, gender = gender
-    };
+    Book c = new Book(id,title,gender);
     nbook.Update(c);
   }
   /* ------------------ EXEMPLARY CODE ---------------*/
     public static void ExemplaryList(){
     Console.WriteLine("------- EXEMPLARYS ---------");
-    List<Exemplary> cs = nexemplary.List();
-    if (cs.Count == 0){
-      Console.WriteLine("No exemplarys!");
+    Exemplary[] cs = nexemplary.List();
+    if (cs.Length == 0) {
+      Console.WriteLine("No Exemplarys registered.");
       return;
     }
     foreach(Exemplary c in cs) Console.WriteLine(c);
     Console.WriteLine();
   }
 
-
   public static void ExemplaryInsert(){
     Console.WriteLine("-------- ADD EXEMPLARY --------------");
     BookList();
+    Console.Write("Enter the code for exemplary:");
+    int id = int.Parse(Console.ReadLine());
     Console.Write("Enter the title: ");
     string title = Console.ReadLine();
     CartList();
     Console.Write("Enter the cart_id: ");
-    int cart = int.Parse(Console.ReadLine());
-    Exemplary c = new Exemplary{
-      title = title, cart = cart
-    };
-    nexemplary.Insert(c);
+    int cartid = int.Parse(Console.ReadLine());
+    Cart c = ncart.List(cartid);
+    Exemplary e = new Exemplary(id,title);
+    c.InsertExemplary(e);
   }
 
 /*   ------------------ USER CODE ------------------- */
 
   public static void UserList(){
-    Console.WriteLine("------- USERS LIST ---------");
-    List<User> cs = nuser.List();
-    if (cs.Count == 0){
-      Console.WriteLine("No users registered!");
+    Console.WriteLine("------- USERS ---------");
+    User[] cs = nuser.List();
+    if (cs.Length == 0) {
+      Console.WriteLine("No users registered.");
       return;
     }
-    foreach(User u in cs) Console.WriteLine(u);
+    foreach(User c in cs) Console.WriteLine(c);
     Console.WriteLine();
   }
 
@@ -243,16 +252,16 @@ class MainClass{
 
   public static void CartList(){
     Console.WriteLine("------- Cart LIST ---------");
-    List<Cart> cs = ncart.List();
-    List<Exemplary> cx = nexemplary.List();
-    if (cs.Count == 0){
+    Cart[] cs = ncart.List();
+    Exemplary[] cx = nexemplary.List();
+    if (cs.Length == 0){
       Console.WriteLine("No carts!");
       return;
     }else{
       foreach(Cart u in cs) Console.WriteLine(u);
       Console.WriteLine();
       Console.WriteLine("|||||||| Exemplarys ||||||");
-      if (cx.Count == 0){
+      if (cx.Length == 0){
         Console.WriteLine("No exemplarys in your cart!");
         return;
       }
@@ -263,15 +272,15 @@ class MainClass{
 
   public static void CartInsert(){
     Console.WriteLine("-------- REGISTER CART --------------");
+    Console.Write("Enter the id for cart: ");
+    int id = int.Parse(Console.ReadLine());
     Console.Write("Enter the cart books capacity: ");
     int capacity = int.Parse(Console.ReadLine());
     UserList();
     Console.Write("Inform the cart user code: ");
     int iduser = int.Parse(Console.ReadLine());
-    Cart c = new Cart{
-      capacity = capacity,
-      user = iduser
-    };
+    User user = nuser.List(iduser);
+    Cart c = new Cart(id, capacity,user);
     ncart.Insert(c);
   }
 
@@ -282,7 +291,7 @@ class MainClass{
     int id = int.Parse(Console.ReadLine());
     Console.Write("Enter the new capacity: ");
     int capacity = int.Parse(Console.ReadLine());
-    Cart c = new Cart{id = id, capacity = capacity};
+    Cart c = new Cart(id,capacity);
     ncart.Update(c);
   }
 
