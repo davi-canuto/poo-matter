@@ -1,6 +1,7 @@
 
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System;
-using System.Xml.Serialization;
 using System.Text;
 using System.IO;
 using System.Linq;
@@ -9,23 +10,18 @@ using System.Collections.Generic;
 
 class NUser{
   static NUser obj = new NUser();
-  private User[] users = new User[10];
-  private int np;
+  public User[] users = new User[10];
+  public int np;
   public NUser() { }
   public void Open() {
-    XmlSerializer xml = new XmlSerializer(typeof(User[]));
-    StreamReader f = new StreamReader("./users.xml", Encoding.Default);
-    xml.Deserialize(f);
-    users = (User[]) xml.Deserialize(f);
-    f.close();
-    nc = users.Length;
+   string s = File.ReadAllText("./users.json");
+   User[] users = JsonSerializer.Deserialize(users);
+   foreach(User u in users) Console.WriteLine(u);
   }
   public void ToSave() {
-    XmlSerializer xml = new XmlSerializer(typeof(User[]));
-    StreamReader f = new StreamReader("./users.xml", false,Encoding.Default);
-    xml.Deserialize(f);
-    xml.Serialize(f, List());
-    f.close();
+    string s = JsonSerializer.Serialize(users);
+    File.WriteAllText("./users.json", s);
+    s.Close();
   }
   public User[] List() {
     User[] p = new User[np];

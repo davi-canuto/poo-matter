@@ -71,6 +71,12 @@ class MainClass{
         op = 100;
       }
     } while (op != 0);
+    try {
+      nuser.ToSave();
+    }
+    catch(Exception erro){
+      Console.WriteLine(erro.Message);
+    }
 
     Console.WriteLine ("Bye.....");
   }

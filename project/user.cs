@@ -9,7 +9,8 @@ public class User {
   public int id;
   public string name;
   public DateTime birthdate;
-
+  private User[] users = new User[10];
+  private int np;
   public User() { }
 
   public User(int id, string name, DateTime birthdate) {
