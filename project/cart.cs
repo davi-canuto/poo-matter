@@ -6,7 +6,6 @@ class Cart{
 
   private Exemplary[] exemplarys = new Exemplary[10];
   private User user;
-  private int userId;
   private int np;
   public Cart() { }
 
@@ -16,7 +15,6 @@ class Cart{
   }
   public Cart(int id, int capacity, User user) : this(id, capacity) {
     this.user = user;
-    this.userId = user.id;
   }
   public void SetId(int id) {
     this.id = id;

@@ -13,13 +13,19 @@ class NUser{
   private int np;
   public NUser() { }
   public void Open() {
-    Archive<User[]> f = new Archive<User[]>();
-    users = f.Open("./users.xml");
-    np = users.Length;
+    XmlSerializer xml = new XmlSerializer(typeof(User[]));
+    StreamReader f = new StreamReader("./users.xml", Encoding.Default);
+    xml.Deserialize(f);
+    users = (User[]) xml.Deserialize(f);
+    f.close();
+    nc = users.Length;
   }
   public void ToSave() {
-    Archive<User[]> f = new Archive<User[]>();
-    f.ToSave("./users.xml", List());
+    XmlSerializer xml = new XmlSerializer(typeof(User[]));
+    StreamReader f = new StreamReader("./users.xml", false,Encoding.Default);
+    xml.Deserialize(f);
+    xml.Serialize(f, List());
+    f.close();
   }
   public User[] List() {
     User[] p = new User[np];
