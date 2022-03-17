@@ -31,7 +31,7 @@ class MainClass{
         switch(o){
           case 1 : UserList(); break;
           case 2 : UserInsert(); break;
-          case 3 : UserRemove(); break;
+          case 3 : UserDelete(); break;
           case 4 : UserUpdate(); break;
         }
       } catch(Exception erro) {
@@ -61,7 +61,7 @@ class MainClass{
           case 2 : BookInsert(); break;
           case 3 : BookRemove();break;
           case 4 : BookUpdate();break;
-          case 5 : ExemplaryInsert(); break;
+          // case 5 : ExemplaryInsert(); break;
           case 99 : CartList();break;
           case 100 : CartLoan();break;
         }
@@ -175,72 +175,65 @@ class MainClass{
   }
   /* ------------------ EXEMPLARY CODE ---------------*/
 
-  public static void ExemplaryInsert(){
-    Console.WriteLine("-------- ADD EXEMPLARY --------------");
-    BookList();
-    Console.Write("Enter the code for exemplary:");
-    int id = int.Parse(Console.ReadLine());
-    Console.Write("Enter the title: ");
-    string title = Console.ReadLine();
-    CartList();
-    Console.Write("Enter the cart_id: ");
-    int cartid = int.Parse(Console.ReadLine());
-    Exemplary e = new Exemplary(id,title);
-    Cart c = ncart.List(cartid);
+  // public static void ExemplaryInsert(){
+  //   Console.WriteLine("-------- ADD EXEMPLARY --------------");
+  //   BookList();
+  //   Console.Write("Enter the code for exemplary:");
+  //   int id = int.Parse(Console.ReadLine());
+  //   Console.Write("Enter the title: ");
+  //   string title = Console.ReadLine();
+  //   CartList();
+  //   Console.Write("Enter the cart_id: ");
+  //   int cartid = int.Parse(Console.ReadLine());
+  //   Exemplary e = new Exemplary(id,title);
+  //   Cart c = ncart.List(cartid);
 
-    c.InsertExemplary(e);
-  }
+  //   c.InsertExemplary(e);
+  // }
 
 /*   ------------------ USER CODE ------------------- */
-
-  public static void UserList(){
-    Console.WriteLine("------- USERS ---------");
-    User[] cs = nuser.List();
-    if (cs.Length == 0) {
-      Console.WriteLine("No users registered.");
+ 
+  public static void UserList() {
+    Console.WriteLine("----- list of users -----");
+    List<User> cs = nuser.List();
+    if (cs.Count == 0) {
+      Console.WriteLine("Not exist users registered");
       return;
     }
     foreach(User c in cs) Console.WriteLine(c);
-    Console.WriteLine();
+    Console.WriteLine();  
   }
 
-
-  public static void UserInsert(){
-    Console.WriteLine("-------- REGISTER USER --------------");
-
-    Console.Write("Enter the id for user: ");
-    int id = int.Parse(Console.ReadLine());
-    Console.Write("Enter the name: ");
+  public static void UserInsert() {
+    Console.WriteLine("----- Registered user -----");
+    Console.Write("Write the user name: ");
     string name = Console.ReadLine();
-    Console.Write("Enter the birth date (dd/MM/yyyy):");
+    Console.Write("Write the user birthdate (dd/MM/yyyy): ");
     DateTime birthdate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", null);
-    User c = new User(id,name,birthdate);
+    User c = new User { name = name, birthdate = birthdate };
     nuser.Insert(c);
   }
 
-  public static void UserRemove(){
-    Console.WriteLine("------USER REMOVE-------");
+  public static void UserUpdate() {
+    Console.WriteLine("----- Update user -----");
     UserList();
-    Console.Write("Inform user code for excludes: ");
+    Console.Write("Enter the user code to be updated:");
+    int id = int.Parse(Console.ReadLine());
+    Console.Write("Enter the user name ");
+    string name = Console.ReadLine();
+    Console.Write("Enter the user birthdate (dd/MM/yyyy): ");
+    DateTime birthdate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", null);
+    User c = new User { id = id, name = name, birthdate = birthdate };
+    nuser.Update(c);
+  }
+
+  public static void UserDelete() {
+    Console.WriteLine("----- Delete user -----");
+    UserList();
+    Console.Write("Enter the id for user excludes: ");
     int id = int.Parse(Console.ReadLine());
     User c = nuser.List(id);
     nuser.Delete(c);
-  }
-
-  public static void UserUpdate(){
-    Console.WriteLine("------USER UPTATE-------");
-    UserList();
-    Console.Write("Enter an id for the user update: ");
-    int id = int.Parse(Console.ReadLine());
-    Console.Write("Enter the new name: ");
-    string name = Console.ReadLine();
-    Console.Write("Enter the new birthdate: ");
-    DateTime birthdate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", null);
-    User c = new User{
-      id = id, name = name, birthdate = birthdate
-    };
-    nuser.Update(c);
-
   }
 
 /*   ------------------ Cart CODE ------------------- */
@@ -275,7 +268,7 @@ class MainClass{
         Console.WriteLine(u);
         int id = u.GetId();
         Cart car = ncart.List(id);
-        Console.WriteLine(car.ListExemplarys());
+        Console.WriteLine(car);
       }
       Console.WriteLine();
     }

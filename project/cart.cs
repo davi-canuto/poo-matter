@@ -29,30 +29,6 @@ public class Cart{
   public int GetCapacity() {
     return capacity;
   }
-  public Exemplary[] ListExemplarys() {
-    Exemplary[] c = new Exemplary[np];
-    Array.Copy(exemplarys, c, np);
-    return c;
-  }
-   public void InsertExemplary(Exemplary p) {
-    if (np == exemplarys.Length) {
-      Array.Resize(ref exemplarys, 2 * exemplarys.Length);
-    }
-    exemplarys[np] = p;
-    np++;
-  }
-  private int IndiceExemplary(Exemplary p) {
-    for (int i = 0; i < np; i++)
-      if (exemplarys[i] == p) return i;
-    return -1;
-  }
-  public void DeleteExemplary(Exemplary p) {
-    int n = IndiceExemplary(p);
-    if (n == -1) return;
-    for (int i = n; i < np - 1; i++)
-      exemplarys[i] = exemplarys[i + 1];
-    np--;
-  }
 
   public override string ToString(){
     if (user == null)

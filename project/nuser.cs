@@ -23,7 +23,7 @@ class NUser{
 
   public User List(int id) {
     for (int i = 0; i < users.Count; i++)
-      if (users[i].Id == id) return users[i];
+      if (users[i].id == id) return users[i];
     return null;
   }
 
@@ -31,7 +31,7 @@ class NUser{
     int max = 0;
     foreach(User obj in users)
       if (obj.id > max) max = obj.id;
-    c.Id = max + 1;
+    c.id = max + 1;
     users.Add(c);
   }
 
