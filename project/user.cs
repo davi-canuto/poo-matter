@@ -11,6 +11,10 @@ public class User {
   public DateTime birthdate;
   private User[] users = new User[10];
   private int np;
+  public int id { get => id; set => id = value; }
+  public string name { get => name; set => name = value; }
+  public DateTime birthdate { get => birthdate; set => birthdate = value; }
+
   public User() { }
 
   public User(int id, string name, DateTime birthdate) {
