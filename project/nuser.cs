@@ -1,6 +1,5 @@
 
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Xml.Serialization;
 using System;
 using System.Text;
 using System.IO;
@@ -14,14 +13,13 @@ class NUser{
   public int np;
   public NUser() { }
   public void Open() {
-   string s = File.ReadAllText("./users.json");
-   User[] users = JsonSerializer.Deserialize(users);
-   foreach(User u in users) Console.WriteLine(u);
+    Archive<User[]> f = new Archive<User[]>();
+    users = f.Open("./users.xml");
+    np = users.Length;
   }
   public void ToSave() {
-    string s = JsonSerializer.Serialize(users);
-    File.WriteAllText("./users.json", s);
-    s.Close();
+    Archive<User[]> f = new Archive<User[]>();
+    f.ToSave("./users.xml", List());
   }
   public User[] List() {
     User[] p = new User[np];
