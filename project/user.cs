@@ -6,11 +6,6 @@ using System.Linq;
 using System.Collections.Generic;
 
 public class User {
-  public int id;
-  public string name;
-  public DateTime birthdate;
-  private User[] users = new User[10];
-  private int np;
   public int id { get => id; set => id = value; }
   public string name { get => name; set => name = value; }
   public DateTime birthdate { get => birthdate; set => birthdate = value; }
@@ -41,6 +36,6 @@ public class User {
     return birthdate;
   }
   public override string ToString() {
-    return id + " - " + name + " - " + birthdate.ToString("dd/MM/yyyy");
+    return id + " - " + name + " - " +       birthdate.ToString("dd/MM/yyyy");
   }
 }

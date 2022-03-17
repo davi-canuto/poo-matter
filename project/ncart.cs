@@ -6,8 +6,6 @@ using System.Linq;
 using System.Collections.Generic;
 
 class NCart {
-  static NCart obj = new NCart();
-  public static NCart Singleton;
 
   private Cart[] carts = new Cart[10];
   private int np;

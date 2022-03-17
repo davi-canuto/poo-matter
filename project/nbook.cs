@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 
 class NBook{
-  static NBook obj = new NBook();
   private Book[] books = new Book[10];
   private int np;
   public NBook(){ }

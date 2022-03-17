@@ -8,7 +8,6 @@ using System.Collections.Generic;
 
 
 class NUser{
-  static NUser obj = new NUser();
   public User[] users = new User[10];
   public int np;
   public NUser() { }

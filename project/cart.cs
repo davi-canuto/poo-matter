@@ -1,6 +1,6 @@
 using System;
 
-class Cart{
+public class Cart{
   public int id;
   public int capacity;
 

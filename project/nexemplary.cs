@@ -6,8 +6,6 @@ using System.Linq;
 using System.Collections.Generic;
 
 class NExemplary{
-  public static NExemplary Singleton;
-  static NExemplary obj = new NExemplary();
   private Exemplary[] exemplarys = new Exemplary[10];
   private int np;
   public NExemplary(){ }
