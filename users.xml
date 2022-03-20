@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfUser xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <User>
+    <id>1</id>
+    <name>davi</name>
+    <birthdate>2002-10-30T00:00:00</birthdate>
+  </User>
+  <User>
+    <id>2</id>
+    <name>joao</name>
+    <birthdate>2002-10-20T00:00:00</birthdate>
+  </User>
+</ArrayOfUser>

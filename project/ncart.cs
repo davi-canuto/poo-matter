@@ -3,39 +3,39 @@ using System.Xml.Serialization;
 using System.Text;
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
 
 class NCart {
 
-  private Cart[] carts = new Cart[10];
-  private int np;
   public NCart(){ }
+  static NCart obj = new NCart();
+  public static NCart Singleton { get => obj; }
+  
+  private Cart[] carts = new Cart[10];
+  private int nc;
+  
   public void Open(){
     Archive<Cart[]> f = new Archive<Cart[]>();
     carts = f.Open("./carts.xml");
-    np = carts.Length;
+    nc = carts.Length;
   }
   public void ToSave(){
     Archive<Cart[]> f = new Archive<Cart[]>();
     f.ToSave("./carts.xml", List());
   }
   public Cart[] List() {
-    Cart[] p = new Cart[np];
-    Array.Copy(carts, p, np);
-    return p;
+    return 
+      carts.Take(nc).OrderBy(obj => obj.GetCapacity()).ToArray();
   }
   public Cart List(int id) {
-    for (int i = 0; i < np; i++)
-      if (carts[i].GetId() == id) return carts[i];
-    return null;
+    return carts.FirstOrDefault(obj => obj.GetId() == id);
   }
 
   public void Insert(Cart p) {
-    if (np == carts.Length) {
+    if (nc == carts.Length) {
       Array.Resize(ref carts, 2 * carts.Length);
     }
-    carts[np] = p;
-    np++;
+    carts[nc] = p;
+    nc++;
   }
 
   public void Update(Cart p) {
@@ -45,7 +45,7 @@ class NCart {
   }
 
   private int Indice(Cart p) {
-    for(int i = 0; i < np; i++)
+    for(int i = 0; i < nc; i++)
       if (carts[i] == p) return i;
     return -1;
   }
@@ -53,8 +53,8 @@ class NCart {
   public void Delete(Cart p) {
     int n = Indice(p);
     if (n == -1) return;
-    for (int i = n; i < np - 1; i++)
+    for (int i = n; i < nc - 1; i++)
       carts[i] = carts[i + 1];
-    np--;
+    nc--;
   }
 }

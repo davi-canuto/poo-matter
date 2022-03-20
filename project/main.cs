@@ -266,9 +266,6 @@ class MainClass{
     }else{
       foreach(Cart u in cs){
         Console.WriteLine(u);
-        int id = u.GetId();
-        Cart car = ncart.List(id);
-        Console.WriteLine(car);
       }
       Console.WriteLine();
     }
@@ -294,7 +291,10 @@ class MainClass{
     int id = int.Parse(Console.ReadLine());
     Console.Write("Enter the new capacity: ");
     int capacity = int.Parse(Console.ReadLine());
-    Cart c = new Cart(id,capacity);
+    Console.Write("Enter the new user id: ");
+    UserList();
+    int id_user = int.Parse(Console.ReadLine());
+    Cart c = new Cart(id,capacity,id_user);
     ncart.Update(c);
   }
 

@@ -8,12 +8,13 @@ public class Cart{
   private int id_user;
   private int np;
 
-  public int id { get => id; set => id = value; }
-  public string capacity { get => capacity; set => capacity = value; }
+  public int Id { get => id; set => id = value; }
+  public int Capacity { get => capacity; set => capacity = value; }
   public Cart() { }
 
-  public Cart(int id, int capacity) {
+  public Cart(int id, int capacity, int id_user) {
     this.id = id;
+    this.id_user = id_user;
     this.capacity = capacity > 0 ? capacity : 0;
   }
   public void SetId(int id) {
@@ -31,7 +32,7 @@ public class Cart{
   }
 
   public override string ToString(){
-    if (user == null)
+    if (id_user == null)
       return id + " - " + " Capacity: " + capacity + " Books ";
     else
       return id + " - " + " Capacity: " + capacity + " Books , User_Id: " + id_user;
