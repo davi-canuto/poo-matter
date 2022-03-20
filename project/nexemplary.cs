@@ -1,14 +1,14 @@
 using System;
-using System.Xml.Serialization;
-using System.Text;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
 
 class NExemplary{
+  public NExemplary(){ }
+  static NExemplary obj = new NExemplary();
+  public static NExemplary Singleton { get => obj; }
   private Exemplary[] exemplarys = new Exemplary[10];
   private int np;
-  public NExemplary(){ }
   public void Open(){
     Archive<Exemplary[]> f = new Archive<Exemplary[]>();
     exemplarys = f.Open("./exemplarys.xml");

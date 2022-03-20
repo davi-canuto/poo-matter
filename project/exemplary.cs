@@ -9,16 +9,17 @@ class Exemplary {
   public int id;
   public string title;
   private Cart cart;
-  private Book book;
   public Exemplary() { }
+
+  public int Id { get => id; set => id = value; }
+  public string Title { get => title; set => title = value; }
 
   public Exemplary(int id, string title) {
     this.id = id;
     this.title = title;
   }
-  public Exemplary(int id, string title, Cart cart, Book book) : this(id,title){
+  public Exemplary(int id, string title, Cart cart) : this(id,title){
     this.cart = cart;
-    this.book = book;
   }
   public void SetId(int id) {
     this.id = id;
@@ -29,9 +30,6 @@ class Exemplary {
   public void SetCart(Cart cart) {
     this.cart = cart;
   }
-  public void SetBook(Book book) {
-    this.book = book;
-  }
   public int GetId() {
     return id;
   }
@@ -40,9 +38,6 @@ class Exemplary {
   }
   public Cart GetCart() {
     return cart;
-  }
-  public Book GetBook() {
-    return book;
   }
 
   public override string ToString(){

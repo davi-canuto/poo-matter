@@ -6,9 +6,9 @@ using System.Linq;
 class MainClass{
 
   private static NUser nuser = NUser.Singleton;
-  private static NBook nbook = new NBook();
+  private static NBook nbook = NBook.Singleton;
   private static NCart ncart = NCart.Singleton;
-  private static NExemplary nexemplary = new NExemplary();
+  private static NExemplary nexemplary = nexemplary.Singleton;
   enum LoanStatus {borrowed, analyze }
   public static void Main(){
 

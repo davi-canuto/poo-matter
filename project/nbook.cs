@@ -5,9 +5,12 @@ using System.IO;
 using System.Linq;
 
 class NBook{
+  public NBook(){ }
+  static NBook obj = new NBook();
+  public static NBook Singleton { get => obj; }
+
   private Book[] books = new Book[10];
   private int np;
-  public NBook(){ }
 
   public void Open(){
     Archive<Book[]> f = new Archive<Book[]>();
