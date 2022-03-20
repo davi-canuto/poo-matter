@@ -19,5 +19,4 @@ class Archive<T> {
     xml.Serialize(f, obj);
     f.Close();
   }
-
 }

@@ -10,4 +10,9 @@
     <name>joao</name>
     <birthdate>2002-10-20T00:00:00</birthdate>
   </User>
+  <User>
+    <id>3</id>
+    <name>joaquim</name>
+    <birthdate>2000-10-10T00:00:00</birthdate>
+  </User>
 </ArrayOfUser>

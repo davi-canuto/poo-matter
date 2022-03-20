@@ -5,9 +5,9 @@ using System.Threading;
 using System.Linq;
 class MainClass{
 
-  private static NUser nuser = new NUser();
+  private static NUser nuser = NUser.Singleton;
   private static NBook nbook = new NBook();
-  private static NCart ncart = new NCart();
+  private static NCart ncart = NCart.Singleton;
   private static NExemplary nexemplary = new NExemplary();
   enum LoanStatus {borrowed, analyze }
   public static void Main(){
@@ -73,6 +73,9 @@ class MainClass{
     } while (op != 0);
     try {
       nuser.ToSave();
+      ncart.ToSave();
+      nbook.ToSave();
+      nexemplary.ToSave();
     }
     catch(Exception erro){
       Console.WriteLine(erro.Message);
@@ -237,26 +240,6 @@ class MainClass{
   }
 
 /*   ------------------ Cart CODE ------------------- */
-
-  // public static void CartList(){
-  //   Console.WriteLine("------- Cart LIST ---------");
-  //   Cart[] cs = ncart.List();
-  //   Exemplary[] cx = cs.ListExemplarys();
-  //   if (cs.Length == 0){
-  //     Console.WriteLine("No carts!");
-  //     return;
-  //   }else{
-  //     foreach(Cart u in cs) Console.WriteLine(u);
-  //     Console.WriteLine();
-  //     Console.WriteLine("|||||||| Exemplarys ||||||");
-  //     if (cx.Length == 0){
-  //       Console.WriteLine("No exemplarys in your cart!");
-  //       return;
-  //     }
-  //     foreach(Exemplary c in cx) Console.WriteLine(c);
-  //     Console.WriteLine();
-  //   }
-  // }
   public static void CartList(){
     Console.WriteLine("------- Cart LIST ---------");
     Cart[] cs = ncart.List();
@@ -291,8 +274,8 @@ class MainClass{
     int id = int.Parse(Console.ReadLine());
     Console.Write("Enter the new capacity: ");
     int capacity = int.Parse(Console.ReadLine());
-    Console.Write("Enter the new user id: ");
     UserList();
+    Console.Write("Enter the new user id: ");
     int id_user = int.Parse(Console.ReadLine());
     Cart c = new Cart(id,capacity,id_user);
     ncart.Update(c);

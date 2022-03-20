@@ -1,6 +1,5 @@
 using System;
-using System.Xml.Serialization;
-using System.Text;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -23,11 +22,14 @@ class NCart {
     f.ToSave("./carts.xml", List());
   }
   public Cart[] List() {
-    return 
-      carts.Take(nc).OrderBy(obj => obj.GetCapacity()).ToArray();
+    Cart[] p = new Cart[nc];
+    Array.Copy(carts, p, nc);
+    return p;
   }
   public Cart List(int id) {
-    return carts.FirstOrDefault(obj => obj.GetId() == id);
+    for (int i = 0; i < nc; i++)
+      if (carts[i].GetId() == id) return carts[i];
+    return null;  
   }
 
   public void Insert(Cart p) {

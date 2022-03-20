@@ -10,6 +10,7 @@ public class Cart{
 
   public int Id { get => id; set => id = value; }
   public int Capacity { get => capacity; set => capacity = value; }
+  public int User_Id { get => id_user; set => id_user = value; }
   public Cart() { }
 
   public Cart(int id, int capacity, int id_user) {
@@ -23,12 +24,18 @@ public class Cart{
   public void SetCapacity(int capacity) {
     this.capacity = capacity;
   }
+  public void SetUserId(int id_user) {
+    this.id_user = id_user;
+  }
 
   public int GetId() {
     return id;
   }
   public int GetCapacity() {
     return capacity;
+  }
+  public int GetUserId() {
+    return id_user;
   }
 
   public override string ToString(){
