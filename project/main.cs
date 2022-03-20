@@ -192,7 +192,7 @@ class MainClass{
   // }
 
 /*   ------------------ USER CODE ------------------- */
- 
+
   public static void UserList() {
     Console.WriteLine("----- list of users -----");
     List<User> cs = nuser.List();
@@ -201,7 +201,7 @@ class MainClass{
       return;
     }
     foreach(User c in cs) Console.WriteLine(c);
-    Console.WriteLine();  
+    Console.WriteLine();
   }
 
   public static void UserInsert() {
@@ -282,9 +282,8 @@ class MainClass{
     int capacity = int.Parse(Console.ReadLine());
     UserList();
     Console.Write("Inform the cart user code: ");
-    int iduser = int.Parse(Console.ReadLine());
-    User user = nuser.List(iduser);
-    Cart c = new Cart(id, capacity,user);
+    int id_user = int.Parse(Console.ReadLine());
+    Cart c = new Cart(id, capacity,id_user);
     ncart.Insert(c);
   }
 

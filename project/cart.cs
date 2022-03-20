@@ -5,16 +5,16 @@ public class Cart{
   public int capacity;
 
   private Exemplary[] exemplarys = new Exemplary[10];
-  private User user;
+  private int id_user;
   private int np;
+
+  public int id { get => id; set => id = value; }
+  public string capacity { get => capacity; set => capacity = value; }
   public Cart() { }
 
   public Cart(int id, int capacity) {
     this.id = id;
     this.capacity = capacity > 0 ? capacity : 0;
-  }
-  public Cart(int id, int capacity, User user) : this(id, capacity) {
-    this.user = user;
   }
   public void SetId(int id) {
     this.id = id;
@@ -34,6 +34,6 @@ public class Cart{
     if (user == null)
       return id + " - " + " Capacity: " + capacity + " Books ";
     else
-      return id + " - " + " Capacity: " + capacity + " Books , User_Id: " + user.id;
+      return id + " - " + " Capacity: " + capacity + " Books , User_Id: " + id_user;
   }
 }
