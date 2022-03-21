@@ -167,7 +167,7 @@ class MainClass{
     nbook.Update(c);
   }
 
-  public static void BookDelete() {
+  public static void BookRemove() {
     Console.WriteLine("----- Delete book -----");
     BookList();
     Console.Write("Enter the id for book excludes: ");
@@ -176,7 +176,6 @@ class MainClass{
     nbook.Delete(c);
   }
   /* ------------------ EXEMPLARY CODE ---------------*/
-
  public static void ExemplaryList(){
     Console.WriteLine("------- EXEMPLARY LIST ---------");
     Exemplary[] cs = nexemplary.List();
@@ -190,16 +189,17 @@ class MainClass{
       Console.WriteLine();
     }
   }
+
   public static void ExemplaryInsert(){
     Console.WriteLine("-------- REGISTER EXEMPLARY --------------");
-    Console.Write("Enter the id for exemplary: ");
+    Console.Write("Enter the id for cart: ");
     int id = int.Parse(Console.ReadLine());
     BookList();
     Console.Write("Enter the book id for exemplary: ");
     int book_id = int.Parse(Console.ReadLine());
-    Book b = nbook.List(book_id);
-    string title = b.title;
-    Exemplary c = new Exemplary(id,title);
+    Book book = nbook.List(book_id);
+    string title = book.title;
+    Exemplary c = new Exemplary(id, title);
     nexemplary.Insert(c);
   }
 /*   ------------------ USER CODE ------------------- */
