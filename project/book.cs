@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-class Book {
+public class Book {
   public int id;
   public string title;
   public string gender;

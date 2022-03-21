@@ -8,7 +8,7 @@ class MainClass{
   private static NUser nuser = NUser.Singleton;
   private static NBook nbook = NBook.Singleton;
   private static NCart ncart = NCart.Singleton;
-  private static NExemplary nexemplary = nexemplary.Singleton;
+  private static NExemplary nexemplary = NExemplary.Singleton;
   enum LoanStatus {borrowed, analyze }
   public static void Main(){
 
@@ -61,7 +61,8 @@ class MainClass{
           case 2 : BookInsert(); break;
           case 3 : BookRemove();break;
           case 4 : BookUpdate();break;
-          // case 5 : ExemplaryInsert(); break;
+          case 5 : ExemplaryInsert(); break;
+          case 6 : ExemplaryList(); break;
           case 99 : CartList();break;
           case 100 : CartLoan();break;
         }
@@ -121,6 +122,7 @@ class MainClass{
     Console.WriteLine("3 - Remove book.");
     Console.WriteLine("4 - Updated book.");
     Console.WriteLine("5 - Add a exemplary to your cart.");
+    Console.WriteLine("6 - List exemplarys.");
     Console.WriteLine("99 - View your cart.");
     Console.WriteLine("100 - Loan your exemplarys in the cart.");
     Console.WriteLine("0 - EXIT!!!!.");
@@ -198,12 +200,9 @@ class MainClass{
     BookList();
     Console.Write("Enter the book id for exemplary: ");
     int book_id = int.Parse(Console.ReadLine());
-    CartList();
-    Console.Write("Enter the cart id: ");
-    int cart_id = int.Parse(Console.ReadLine());
-    Cart cart = ncart.List(cart_id);
-    Book book = nbook.List(book_id);
-    Exemplary c = new Exemplary(id,cart,book);
+    Book b = nbook.List(book_id);
+    string title = b.title;
+    Exemplary c = new Exemplary(id,title);
     nexemplary.Insert(c);
   }
 /*   ------------------ USER CODE ------------------- */
