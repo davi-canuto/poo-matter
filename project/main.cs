@@ -133,52 +133,47 @@ class MainClass{
   }
 
 /*   ------------------ BOOK CODE ------------------- */
-  public static void BookList(){
-    Console.WriteLine("------- BOOKS ---------");
-    Book[] cs = nbook.List();
-    if (cs.Length == 0){
-      Console.WriteLine("No books!");
+  public static void BookList() {
+    Console.WriteLine("----- BOOKS -----");
+    List<Book> cs = nbook.List();
+    if (cs.Count == 0) {
+      Console.WriteLine("Not exists books");
       return;
-    }else{
-      foreach(Book u in cs){
-        Console.WriteLine(u);
-      }
-      Console.WriteLine();
     }
+    foreach(Book c in cs) Console.WriteLine(c);
+    Console.WriteLine();
   }
-  public static void BookInsert(){
-    Console.WriteLine("-------- REGISTER BOOKS --------------");
 
-    Console.Write("Enter the code for book: ");
-    int id = int.Parse(Console.ReadLine());
-    Console.Write("Enter the title: ");
+  public static void BookInsert() {
+    Console.WriteLine("----- Insert book in library -----");
+    Console.Write("Write the title: ");
     string title = Console.ReadLine();
-    Console.Write("Enter the gender: ");
+    Console.Write("Write the gender: ");
     string gender = Console.ReadLine();
-    Book c = new Book(id, title, gender);
+    Book c = new Book { title = title, gender = gender };
     nbook.Insert(c);
   }
 
-  public static void BookRemove(){
-    Console.WriteLine("------BOOK REMOVE-------");
+  public static void BookUpdate() {
+    Console.WriteLine("----- Update user -----");
     BookList();
-    Console.Write("Inform user code for excludes Book: ");
+    Console.Write("Enter the book code to be updated:");
     int id = int.Parse(Console.ReadLine());
-    Book c = nbook.List(id);
-    nbook.Delete(c);
-  }
-
-  public static void BookUpdate(){
-    Console.WriteLine("------ BOOK UPDATE -------");
-    BookList();
-    Console.Write("Enter an id for the book update: ");
-    int id = int.Parse(Console.ReadLine());
-    Console.Write("Enter the new title: ");
+    Console.Write("Enter the book title ");
     string title = Console.ReadLine();
     Console.Write("Enter the new gender: ");
     string gender = Console.ReadLine();
-    Book c = new Book(id,title,gender);
+    Book c = new Book { id = id, title = title, gender = gender };
     nbook.Update(c);
+  }
+
+  public static void BookDelete() {
+    Console.WriteLine("----- Delete book -----");
+    BookList();
+    Console.Write("Enter the id for book excludes: ");
+    int id = int.Parse(Console.ReadLine());
+    Book c = nbook.List(id);
+    nbook.Delete(c);
   }
   /* ------------------ EXEMPLARY CODE ---------------*/
 
