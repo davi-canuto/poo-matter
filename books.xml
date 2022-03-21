@@ -1,18 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfBook xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Book>
-    <id>1</id>
-    <title>harry potter</title>
-    <gender>ficcao</gender>
-  </Book>
-  <Book>
-    <id>3</id>
-    <title>senhor das moscas</title>
-    <gender>romance</gender>
-  </Book>
-  <Book>
-    <id>2</id>
-    <title>senhor dos aneis</title>
-    <gender>ficcao</gender>
-  </Book>
-</ArrayOfBook>
+<ArrayOfBook xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" />

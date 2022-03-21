@@ -63,7 +63,8 @@ class MainClass{
           case 4 : BookUpdate();break;
           case 5 : ExemplaryInsert(); break;
           case 6 : ExemplaryList(); break;
-          case 99 : CartList();break;
+          case 7 : InsertExemplaryInCart(); break;
+          case 99 : CartListExemplary();break;
           case 100 : CartLoan();break;
         }
       }
@@ -121,8 +122,9 @@ class MainClass{
     Console.WriteLine("2 - Insert book.");
     Console.WriteLine("3 - Remove book.");
     Console.WriteLine("4 - Updated book.");
-    Console.WriteLine("5 - Add a exemplary to your cart.");
+    Console.WriteLine("5 - Insert exemplary.");
     Console.WriteLine("6 - List exemplarys.");
+    Console.WriteLine("7 - Insert exemplary in cart.");
     Console.WriteLine("99 - View your cart.");
     Console.WriteLine("100 - Loan your exemplarys in the cart.");
     Console.WriteLine("0 - EXIT!!!!.");
@@ -244,6 +246,20 @@ class MainClass{
 
 /*   ------------------ Cart CODE ------------------- */
   public static void CartList(){
+    Console.WriteLine("-----------CART LIST ---------");
+    Cart[] cs = ncart.List();
+    if (cs.Length == 0){
+      Console.WriteLine("No carts!");
+      return;
+    }
+    else
+    {
+      foreach(Cart u in cs) Console.WriteLine(u);
+      Console.WriteLine();
+    }
+  }
+  
+  public static void CartListExemplary(){
     Console.WriteLine("------- Cart LIST ---------");
     Cart[] cs = ncart.List();
     Exemplary[] es = ncart.ListExemplarys();
@@ -251,14 +267,11 @@ class MainClass{
       Console.WriteLine("No carts!");
       return;
     }
-    else if (es.Length == 0){
-      bool exemp = false;
-    }
-    else if (exemp == true)
-    {
+    else if (es.Length != 0){
       foreach(Cart u in cs){
         Console.WriteLine(u);
       }
+      Console.WriteLine("////EXEMPLARYS\\\\");
       foreach(Exemplary k in es){
         Console.WriteLine(k);
       }
@@ -270,20 +283,6 @@ class MainClass{
       foreach(Cart u in cs){
         Console.WriteLine(u);
       }
-    }
-  }
-  public static void CartList(){
-    Console.WriteLine("------- Cart LIST ---------");
-    Cart[] cs = ncart.List();
-    if (cs.Length == 0 ){
-      Console.WriteLine("No carts!");
-      return;
-    }
-    else{
-      foreach(Cart u in cs){
-        Console.WriteLine(u);
-      }
-      Console.WriteLine();
     }
   }
 
@@ -335,7 +334,6 @@ class MainClass{
     CartList();
     Console.Write("Inform id code cart for loan: ");
     int id = int.Parse(Console.ReadLine());
-
     Cart c = ncart.List(id);
     Console.WriteLine($"Cart borrowed: {c} Status: Borrowed");
   }

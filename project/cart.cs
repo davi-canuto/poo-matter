@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 public class Cart{
   public int id;
@@ -8,8 +9,6 @@ public class Cart{
   private int id_user;
   private int np;
 
-  public int Id { get => id; set => id = value; }
-  public int Capacity { get => capacity; set => capacity = value; }
   public int User_Id { get => id_user; set => id_user = value; }
   public Cart() { }
 

@@ -2,16 +2,7 @@
 <ArrayOfCart xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Cart>
     <id>1</id>
-    <capacity>14</capacity>
-    <Id>1</Id>
-    <Capacity>14</Capacity>
+    <capacity>15</capacity>
     <User_Id>1</User_Id>
-  </Cart>
-  <Cart>
-    <id>2</id>
-    <capacity>23</capacity>
-    <Id>2</Id>
-    <Capacity>23</Capacity>
-    <User_Id>3</User_Id>
   </Cart>
 </ArrayOfCart>

@@ -10,7 +10,7 @@ class NCart {
   public static NCart Singleton { get => obj; }
 
   private Cart[] carts = new Cart[10];
-  private Exemplary[] exemplarys = new Cart[10];
+  private Exemplary[] exemplarys = new Exemplary[10];
   private int nc;
   private int np;
 
@@ -67,13 +67,13 @@ class NCart {
     if (nc == exemplarys.Length) {
       Array.Resize(ref exemplarys, 2 * exemplarys.Length);
     }
-    exemplarys[nc] = p;
+    exemplarys[nc] = e;
     nc++;
   }
 
   public Exemplary[] ListExemplarys() {
-    Exemplary[] p = new Exemplary[nc];
-    Array.Copy(carts, p, nc);
-    return p;
+    Exemplary[] a = new Exemplary[nc];
+    Array.Copy(exemplarys, a, nc);
+    return a;
   }
 }
