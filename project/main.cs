@@ -178,22 +178,34 @@ class MainClass{
   }
   /* ------------------ EXEMPLARY CODE ---------------*/
 
-  // public static void ExemplaryInsert(){
-  //   Console.WriteLine("-------- ADD EXEMPLARY --------------");
-  //   BookList();
-  //   Console.Write("Enter the code for exemplary:");
-  //   int id = int.Parse(Console.ReadLine());
-  //   Console.Write("Enter the title: ");
-  //   string title = Console.ReadLine();
-  //   CartList();
-  //   Console.Write("Enter the cart_id: ");
-  //   int cartid = int.Parse(Console.ReadLine());
-  //   Exemplary e = new Exemplary(id,title);
-  //   Cart c = ncart.List(cartid);
-
-  //   c.InsertExemplary(e);
-  // }
-
+ public static void ExemplaryList(){
+    Console.WriteLine("------- EXEMPLARY LIST ---------");
+    Exemplary[] cs = nexemplary.List();
+    if (cs.Length == 0){
+      Console.WriteLine("No exemplarys!");
+      return;
+    }else{
+      foreach(Exemplary u in cs){
+        Console.WriteLine(u);
+      }
+      Console.WriteLine();
+    }
+  }
+  public static void ExemplaryInsert(){
+    Console.WriteLine("-------- REGISTER EXEMPLARY --------------");
+    Console.Write("Enter the id for exemplary: ");
+    int id = int.Parse(Console.ReadLine());
+    BookList();
+    Console.Write("Enter the book id for exemplary: ");
+    int book_id = int.Parse(Console.ReadLine());
+    CartList();
+    Console.Write("Enter the cart id: ");
+    int cart_id = int.Parse(Console.ReadLine());
+    Cart cart = ncart.List(cart_id);
+    Book book = nbook.List(book_id);
+    Exemplary c = new Exemplary(id,cart,book);
+    nexemplary.Insert(c);
+  }
 /*   ------------------ USER CODE ------------------- */
 
   public static void UserList() {

@@ -7,19 +7,18 @@ using System.Collections.Generic;
 
 class Exemplary {
   public int id;
-  public string title;
   private Cart cart;
+  private Book book;
   public Exemplary() { }
 
   public int Id { get => id; set => id = value; }
-  public string Title { get => title; set => title = value; }
-
-  public Exemplary(int id, string title) {
+  public string BookId { get => book.GetId(); set => book.GetId() = value; }
+  public Exemplary(int id) {
     this.id = id;
-    this.title = title;
   }
-  public Exemplary(int id, string title, Cart cart) : this(id,title){
+  public Exemplary(int id, Cart cart, Book book) : this(id){
     this.cart = cart;
+    this.book = book;
   }
   public void SetId(int id) {
     this.id = id;
@@ -30,6 +29,9 @@ class Exemplary {
   public void SetCart(Cart cart) {
     this.cart = cart;
   }
+  public void SetBook(Book book) {
+    this.book = book;
+  }
   public int GetId() {
     return id;
   }
@@ -39,11 +41,14 @@ class Exemplary {
   public Cart GetCart() {
     return cart;
   }
+  public Book GetBook() {
+    return book;
+  }
 
   public override string ToString(){
     if (cart == null)
-      return id + " - " + title;
+      return id + " - " + book.title;
     else
-      return id + " - " + title + " -  Cart_id: " + cart.id;
+      return id + " - " + book.title + " -  Cart_id: " + cart.id;
   }
 }

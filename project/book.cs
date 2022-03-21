@@ -5,7 +5,8 @@ class Book {
   public int id;
   public string title;
   public string gender;
-   public int Id { get => id; set => id = value; }
+   private Exemplary[] exemplarys = new Exemplary[10];
+  public int Id { get => id; set => id = value; }
   public string Title { get => title; set => title = value; }
   public string Gender { get => gender; set => gender = value; }
 
