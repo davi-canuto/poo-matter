@@ -1,2 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfExemplary xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" />
+<ArrayOfExemplary xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Exemplary>
+    <id>1</id>
+    <title>harry potter</title>
+  </Exemplary>
+  <Exemplary>
+    <id>2</id>
+    <title>senhor das moscas</title>
+  </Exemplary>
+</ArrayOfExemplary>

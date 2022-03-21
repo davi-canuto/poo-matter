@@ -7,6 +7,6 @@ public class Exemplary : IComparable<Exemplary>  {
     return this.title.CompareTo(obj.title);
   }
   public override string ToString() {
-    return id + " - " + exemplary;
+    return id + " - " + title;
   }
 }

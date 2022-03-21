@@ -5,4 +5,14 @@
     <title>harry potter</title>
     <gender>ficcao</gender>
   </Book>
+  <Book>
+    <id>3</id>
+    <title>senhor das moscas</title>
+    <gender>romance</gender>
+  </Book>
+  <Book>
+    <id>2</id>
+    <title>senhor dos aneis</title>
+    <gender>ficcao</gender>
+  </Book>
 </ArrayOfBook>

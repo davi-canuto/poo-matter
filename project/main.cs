@@ -177,13 +177,13 @@ class MainClass{
   }
   /* ------------------ EXEMPLARY CODE ---------------*/
  public static void ExemplaryList(){
-   Console.WriteLine("----- list of users -----");
-    List<User> cs = nuser.List();
+   Console.WriteLine("----- list of exemplarys -----");
+    List<Exemplary> cs = nexemplary.List();
     if (cs.Count == 0) {
-      Console.WriteLine("Not exist users registered");
+      Console.WriteLine("Not exists exemplarys");
       return;
     }
-    foreach(User c in cs) Console.WriteLine(c);
+    foreach(Exemplary c in cs) Console.WriteLine(c);
     Console.WriteLine();
   }
 
@@ -191,8 +191,9 @@ class MainClass{
     Console.WriteLine("----- Insert Exemplary -----");
     BookList();
     Console.Write("Write id for the book: ");
-    int book_id = Console.ReadLine();
+    int book_id = int.Parse(Console.ReadLine());
     Book book = nbook.List(book_id);
+    string title = book.title;
     Exemplary c = new Exemplary { title = title };
     nexemplary.Insert(c);
   }
