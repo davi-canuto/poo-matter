@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.IO;
 using System.Linq;
 
@@ -19,14 +20,11 @@ class NExemplary{
     f.ToSave("./exemplarys.xml", List());
   }
   public Exemplary[] List() {
-    Exemplary[] p = new Exemplary[np];
-    Array.Copy(exemplarys, p, np);
-    return p;
+    return 
+      exemplarys.Take(np).OrderBy(obj => obj.GetTitle()).ToArray();
   }
   public Exemplary List(int id) {
-    for (int i = 0; i < np; i++)
-      if (exemplarys[i].GetId() == id) return exemplarys[i];
-    return null;
+    return exemplarys.FirstOrDefault(obj => obj.GetId() == id);
   }
 
   public void Insert(Exemplary p) {

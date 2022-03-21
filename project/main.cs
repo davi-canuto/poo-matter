@@ -133,17 +133,19 @@ class MainClass{
   }
 
 /*   ------------------ BOOK CODE ------------------- */
-    public static void BookList(){
+  public static void BookList(){
     Console.WriteLine("------- BOOKS ---------");
     Book[] cs = nbook.List();
-    if (cs.Length == 0) {
-      Console.WriteLine("No books registered.");
+    if (cs.Length == 0){
+      Console.WriteLine("No books!");
       return;
+    }else{
+      foreach(Book u in cs){
+        Console.WriteLine(u);
+      }
+      Console.WriteLine();
     }
-    foreach(Book c in cs) Console.WriteLine(c);
-    Console.WriteLine();
   }
-
   public static void BookInsert(){
     Console.WriteLine("-------- REGISTER BOOKS --------------");
 

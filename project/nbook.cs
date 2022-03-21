@@ -1,5 +1,5 @@
 using System;
-using System.Xml.Serialization;
+using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Linq;
@@ -9,35 +9,32 @@ class NBook{
   static NBook obj = new NBook();
   public static NBook Singleton { get => obj; }
 
-  private Book[] books = new Book[10];
-  private int np;
+  private Book[] books = new Book[20];
+  private int nc;
 
   public void Open(){
     Archive<Book[]> f = new Archive<Book[]>();
     books = f.Open("./books.xml");
-    np = books.Length;
+    nc = books.Length;
   }
   public void ToSave(){
     Archive<Book[]> f = new Archive<Book[]>();
     f.ToSave("./books.xml", List());
   }
   public Book[] List() {
-    Book[] p = new Book[np];
-    Array.Copy(books, p, np);
-    return p;
+    return 
+      books.Take(nc).OrderBy(obj => obj.GetTitle()).ToArray();
   }
   public Book List(int id) {
-    for (int i = 0; i < np; i++)
-      if (books[i].GetId() == id) return books[i];
-    return null;
+     return books.FirstOrDefault(obj => obj.GetId() == id);
   }
 
   public void Insert(Book p) {
-    if (np == books.Length) {
+    if (nc == books.Length) {
       Array.Resize(ref books, 2 * books.Length);
     }
-    books[np] = p;
-    np++;
+    books[nc] = p;
+    nc++;
   }
 
   public void Update(Book p) {
@@ -48,7 +45,7 @@ class NBook{
   }
 
   private int Indice(Book p) {
-    for(int i = 0; i < np; i++)
+    for(int i = 0; i < nc; i++)
       if (books[i] == p) return i;
     return -1;
   }
@@ -56,8 +53,8 @@ class NBook{
   public void Delete(Book p) {
     int n = Indice(p);
     if (n == -1) return;
-    for (int i = n; i < np - 1; i++)
+    for (int i = n; i < nc - 1; i++)
       books[i] = books[i + 1];
-    np--;
+    nc--;
   }
 }
