@@ -1,37 +1,47 @@
+
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Linq;
+
 
 class NExemplary{
-  public NExemplary(){ }
+  public NExemplary() { }
   static NExemplary obj = new NExemplary();
   public static NExemplary Singleton { get => obj; }
-  private Exemplary[] exemplarys = new Exemplary[10];
-  private int np;
-  public void Open(){
-    Archive<Exemplary[]> f = new Archive<Exemplary[]>();
+  private List<Exemplary> exemplarys = new List<Exemplary>();
+  public void Open() {
+    Archive<List<Exemplary>> f = new Archive<List<Exemplary>>();
     exemplarys = f.Open("./exemplarys.xml");
-    np = exemplarys.Length;
   }
-  public void ToSave(){
-    Archive<Exemplary[]> f = new Archive<Exemplary[]>();
+  public void ToSave() {
+    Archive<List<Exemplary>> f = new Archive<List<Exemplary>>();
     f.ToSave("./exemplarys.xml", List());
   }
-  public Exemplary[] List() {
-    return 
-      exemplarys.Take(np).OrderBy(obj => obj.GetTitle()).ToArray();
-  }
-  public Exemplary List(int id) {
-    return exemplarys.FirstOrDefault(obj => obj.GetId() == id);
+  public List<Exemplary> List() {
+    exemplarys.Sort();
+    return exemplarys;
   }
 
-  public void Insert(Exemplary p) {
-    if (np == exemplarys.Length) {
-      Array.Resize(ref exemplarys, 2 * exemplarys.Length);
-    }
-    exemplarys[np] = p;
-    np++;
+  public Exemplary List(int id) {
+    for (int i = 0; i < exemplarys.Count; i++)
+      if (exemplarys[i].id == id) return exemplarys[i];
+    return null;
+  }
+
+  public void Insert(Exemplary c) {
+    int max = 0;
+    foreach(Exemplary obj in exemplarys)
+      if (obj.id > max) max = obj.id;
+    c.id = max + 1;
+    exemplarys.Add(c);
+  }
+
+  public void Update(Exemplary c) {
+    Exemplary c_atual = List(c.id);
+    if (c_atual == null) return;
+    c_atual.title = c.title;
+  }
+
+  public void Delete(Exemplary c) {
+    if (c != null) exemplarys.Remove(c);
   }
 }
