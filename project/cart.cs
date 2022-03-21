@@ -4,7 +4,7 @@ public class Cart{
   public int id;
   public int capacity;
 
-  private Exemplary[] exemplarys = new Exemplary[10];
+  private List<Exemplary> exemplarys = new List<Exemplary>();
   private int id_user;
   private int np;
 

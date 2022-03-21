@@ -246,10 +246,40 @@ class MainClass{
   public static void CartList(){
     Console.WriteLine("------- Cart LIST ---------");
     Cart[] cs = ncart.List();
-    if (cs.Length == 0){
+    Exemplary[] es = ncart.ListExemplarys();
+    if (cs.Length == 0 ){
       Console.WriteLine("No carts!");
       return;
-    }else{
+    }
+    else if (es.Length == 0){
+      bool exemp = false;
+    }
+    else if (exemp == true)
+    {
+      foreach(Cart u in cs){
+        Console.WriteLine(u);
+      }
+      foreach(Exemplary k in es){
+        Console.WriteLine(k);
+      }
+      Console.WriteLine();
+      return;
+    }
+    else
+    {
+      foreach(Cart u in cs){
+        Console.WriteLine(u);
+      }
+    }
+  }
+  public static void CartList(){
+    Console.WriteLine("------- Cart LIST ---------");
+    Cart[] cs = ncart.List();
+    if (cs.Length == 0 ){
+      Console.WriteLine("No carts!");
+      return;
+    }
+    else{
       foreach(Cart u in cs){
         Console.WriteLine(u);
       }
@@ -291,6 +321,14 @@ class MainClass{
     int id = int.Parse(Console.ReadLine());
     Cart c = ncart.List(id);
     ncart.Delete(c);
+  }
+  public static void InsertExemplaryInCart(){
+    Console.WriteLine("--- INSERT EXEMPLARY IN CART -----");
+    ExemplaryList();
+    Console.WriteLine("Inform id code exemplary for add to cart: ");
+    int id_exemplary = int.Parse(Console.ReadLine());
+    Exemplary e = nexemplary.List(id_exemplary);
+    ncart.InsertExemplary(e);
   }
   public static void CartLoan(){
     Console.WriteLine("------ CART LOAN -------");
