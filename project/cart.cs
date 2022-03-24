@@ -38,9 +38,6 @@ public class Cart{
   }
 
   public override string ToString(){
-    if (id_user == null)
-      return id + " - " + " Capacity: " + capacity + " Books ";
-    else
-      return id + " - " + " Capacity: " + capacity + " Books , User_Id: " + id_user;
+    return id + " - " + " Capacity: " + capacity + " Books , User_Id: " + id_user;
   }
 }

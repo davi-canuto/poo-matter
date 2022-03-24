@@ -24,14 +24,11 @@ class NCart {
     f.ToSave("./carts.xml", List());
   }
   public Cart[] List() {
-    Cart[] p = new Cart[nc];
-    Array.Copy(carts, p, nc);
-    return p;
+   return 
+      carts.Take(nc).OrderBy(obj => obj.GetCapacity()).ToArray();
   }
   public Cart List(int id) {
-    for (int i = 0; i < nc; i++)
-      if (carts[i].GetId() == id) return carts[i];
-    return null;
+    return carts.FirstOrDefault(obj => obj.GetId() == id);
   }
 
   public void Insert(Cart p) {
